@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MTGPlayerCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="256"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="387" height="256"/>
+                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uIr-tw-hQg">
+                        <rect key="frame" x="0.0" y="6" width="387" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="k6z-cJ-mwn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="0.90480083626760566" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="44" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-wE-6OQ">
+                        <rect key="frame" x="138.5" y="18.5" width="110" height="104"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="104" id="BI5-YN-EUM"/>
+                            <constraint firstAttribute="width" constant="110" id="DPw-P8-JGh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="87"/>
+                        <color key="textColor" white="1" alpha="0.89957086267605624" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvi-mp-Vcd" userLabel="minusOneLife" customClass="MTGLifeButton">
+                        <rect key="frame" x="70.5" y="20" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="6Jm-ke-8Pj"/>
+                            <constraint firstAttribute="width" constant="46" id="fZO-ew-jNZ"/>
+                        </constraints>
+                        <state key="normal" title="-1">
+                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onLifeCounterMinus1:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="uBS-dm-Kiz"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJr-CK-q5W" userLabel="addOneLife" customClass="MTGLifeButton">
+                        <rect key="frame" x="270.5" y="20" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="6XT-0u-0UB"/>
+                            <constraint firstAttribute="height" constant="46" id="Sfw-Pt-xpP"/>
+                            <constraint firstAttribute="width" constant="46" id="kEu-gB-aCn"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="ox7-Ot-nGm"/>
+                        </constraints>
+                        <state key="normal" title="+1">
+                            <color key="titleColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onLifeCounterAdd1:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="sYd-JX-1x5"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlL-vH-YXb" userLabel="addFiveLife" customClass="MTGLifeButton">
+                        <rect key="frame" x="270.5" y="74" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="46" id="4se-u1-luY"/>
+                            <constraint firstAttribute="height" constant="46" id="Faf-TN-Dfu"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="UhR-kM-Ol5"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="46" id="Z8e-vA-bYv"/>
+                            <constraint firstAttribute="width" constant="46" id="ZTr-9d-TKj"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="zLG-RL-MRN"/>
+                        </constraints>
+                        <state key="normal" title="+5">
+                            <color key="titleColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onLifeCounterAdd5:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="KdZ-6q-X0V"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Lz-KU-UVV" userLabel="minusFiveLife" customClass="MTGLifeButton">
+                        <rect key="frame" x="70.5" y="74" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="HCe-B6-0G0"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="rAE-ck-Mnm"/>
+                            <constraint firstAttribute="width" constant="46" id="yhR-ns-MOW"/>
+                            <constraint firstAttribute="height" constant="46" id="zBc-0s-5xp"/>
+                        </constraints>
+                        <state key="normal" title="-5">
+                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onLifeCounterMinus5:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="mXs-1c-rvh"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeS-xN-XYy">
+                        <rect key="frame" x="0.0" y="125" width="387" height="65"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UUU-Fg-37G" userLabel="Poison counters">
+                                <rect key="frame" x="195.5" y="17" width="28.5" height="31.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="Ut1-u0-Etg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="0.89957086269999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q50-eh-pR5" customClass="MTGLifeButton">
+                                <rect key="frame" x="70.5" y="9.5" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="CGZ-M4-fc5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="Rhr-kz-vhe"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="Zt8-dN-2g8"/>
+                                    <constraint firstAttribute="height" constant="46" id="xWh-en-0B0"/>
+                                </constraints>
+                                <state key="normal" title="-1"/>
+                                <connections>
+                                    <action selector="onPoisonCounterMinus1:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="hHc-2l-Min"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LifePoison" translatesAutoresizingMaskIntoConstraints="NO" id="8ma-Ob-QhH">
+                                <rect key="frame" x="165.5" y="20.5" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="LTQ-m9-WXy"/>
+                                    <constraint firstAttribute="height" constant="24" id="svo-md-It6"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT7-AP-b3a" customClass="MTGLifeButton">
+                                <rect key="frame" x="270.5" y="9.5" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="6qb-mK-wPo"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="QG5-Yd-h7r"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="46" id="QGe-PB-DSH"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="kSW-tj-j7q"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="46" id="kWX-Cy-qhv"/>
+                                    <constraint firstAttribute="height" constant="46" id="koe-zD-SyO"/>
+                                </constraints>
+                                <state key="normal" title="+1"/>
+                                <connections>
+                                    <action selector="onPoisonCounterAdd1:" destination="gTV-IL-0wX" eventType="primaryActionTriggered" id="Vct-w5-r3d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UUU-Fg-37G" firstAttribute="centerX" secondItem="LeS-xN-XYy" secondAttribute="centerX" constant="16" id="1fc-K4-l1K"/>
+                            <constraint firstItem="Q50-eh-pR5" firstAttribute="centerX" secondItem="LeS-xN-XYy" secondAttribute="centerX" constant="-100" id="2dx-jB-ewt"/>
+                            <constraint firstItem="pT7-AP-b3a" firstAttribute="centerY" secondItem="LeS-xN-XYy" secondAttribute="centerY" id="3Pq-W4-D38"/>
+                            <constraint firstAttribute="height" constant="65" id="4jU-hc-HVX"/>
+                            <constraint firstItem="Q50-eh-pR5" firstAttribute="centerY" secondItem="LeS-xN-XYy" secondAttribute="centerY" id="HZh-aS-nmG"/>
+                            <constraint firstItem="8ma-Ob-QhH" firstAttribute="centerY" secondItem="LeS-xN-XYy" secondAttribute="centerY" id="I2I-D5-dN3"/>
+                            <constraint firstItem="8ma-Ob-QhH" firstAttribute="centerX" secondItem="LeS-xN-XYy" secondAttribute="centerX" constant="-16" id="aF6-ht-dK6"/>
+                            <constraint firstItem="pT7-AP-b3a" firstAttribute="centerX" secondItem="LeS-xN-XYy" secondAttribute="centerX" constant="100" id="qIH-zo-jBo"/>
+                            <constraint firstItem="8ma-Ob-QhH" firstAttribute="centerX" secondItem="LeS-xN-XYy" secondAttribute="centerX" constant="-16" id="tI2-Dk-0Qm"/>
+                            <constraint firstItem="UUU-Fg-37G" firstAttribute="centerY" secondItem="LeS-xN-XYy" secondAttribute="centerY" id="vf3-kb-wiH"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTt-pt-Aym" userLabel="CommanderView">
+                        <rect key="frame" x="0.0" y="191" width="387" height="65"/>
+                        <subviews>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNs-Wu-sQY">
+                                <rect key="frame" x="289.5" y="15" width="30" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="ZR3-7n-Lfv"/>
+                                    <constraint firstAttribute="width" constant="30" id="yJs-PP-Nr8"/>
+                                </constraints>
+                                <state key="normal" title="EDH" image="EDHButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commander" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-Xg-Mhl">
+                                <rect key="frame" x="105.5" y="12.5" width="176" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6Ay-66-p7K"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="CER-eA-jE6"/>
+                                    <constraint firstAttribute="width" constant="176" id="P74-hg-KBj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="176" id="t4C-KT-CaU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="0.89957086269999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uws-GV-6ch">
+                                <rect key="frame" x="67.5" y="15" width="30" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="1ww-jk-bLM"/>
+                                    <constraint firstAttribute="height" constant="35" id="3cH-7a-fMT"/>
+                                </constraints>
+                                <state key="normal" title="EDH" image="EDHButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UNs-Wu-sQY" firstAttribute="leading" secondItem="ndI-Xg-Mhl" secondAttribute="trailing" constant="8" id="1YL-ML-eq2"/>
+                            <constraint firstItem="ndI-Xg-Mhl" firstAttribute="centerX" secondItem="XTt-pt-Aym" secondAttribute="centerX" id="2Hn-7d-YVs"/>
+                            <constraint firstItem="ndI-Xg-Mhl" firstAttribute="leading" secondItem="uws-GV-6ch" secondAttribute="trailing" constant="8" id="Bj6-ay-Blp"/>
+                            <constraint firstItem="ndI-Xg-Mhl" firstAttribute="centerY" secondItem="XTt-pt-Aym" secondAttribute="centerY" id="OVB-uM-net"/>
+                            <constraint firstAttribute="height" constant="65" id="XWi-nL-zV3"/>
+                            <constraint firstItem="uws-GV-6ch" firstAttribute="centerY" secondItem="XTt-pt-Aym" secondAttribute="centerY" id="g5X-Kw-ND1"/>
+                            <constraint firstItem="UNs-Wu-sQY" firstAttribute="centerY" secondItem="XTt-pt-Aym" secondAttribute="centerY" id="ncr-Qd-V6P"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="5Lz-KU-UVV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-100" id="59v-tF-LMq"/>
+                <constraint firstItem="cJr-CK-q5W" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="82R-AS-nLi"/>
+                <constraint firstItem="XTt-pt-Aym" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="E8d-bV-WK8"/>
+                <constraint firstItem="nvi-mp-Vcd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-100" id="EFv-7N-tby"/>
+                <constraint firstItem="uIr-tw-hQg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="FpE-io-9pV"/>
+                <constraint firstItem="XTt-pt-Aym" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="GIr-od-uE0"/>
+                <constraint firstAttribute="bottom" secondItem="XTt-pt-Aym" secondAttribute="bottom" id="GWt-TF-EYZ"/>
+                <constraint firstItem="hBo-wE-6OQ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="GYa-ca-FAO"/>
+                <constraint firstAttribute="trailing" secondItem="LeS-xN-XYy" secondAttribute="trailing" id="R1K-CC-A2U"/>
+                <constraint firstAttribute="trailing" secondItem="XTt-pt-Aym" secondAttribute="trailing" id="bDn-Z1-HD5"/>
+                <constraint firstItem="LeS-xN-XYy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d4x-Oh-fgq"/>
+                <constraint firstItem="hBo-wE-6OQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="18.5" id="fuI-l6-068"/>
+                <constraint firstAttribute="trailing" secondItem="uIr-tw-hQg" secondAttribute="trailing" id="iGM-7j-ie7"/>
+                <constraint firstItem="uIr-tw-hQg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mGA-ls-kF0"/>
+                <constraint firstAttribute="bottom" secondItem="LeS-xN-XYy" secondAttribute="bottom" constant="66" id="sBD-86-fv8"/>
+                <constraint firstItem="nvi-mp-Vcd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="stP-Ys-v20"/>
+                <constraint firstItem="IlL-vH-YXb" firstAttribute="top" secondItem="cJr-CK-q5W" secondAttribute="bottom" constant="8" id="tgu-m7-pGt"/>
+                <constraint firstItem="IlL-vH-YXb" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="100" id="xAn-zW-IOh"/>
+                <constraint firstItem="5Lz-KU-UVV" firstAttribute="top" secondItem="nvi-mp-Vcd" secondAttribute="bottom" constant="8" id="z6a-EU-fwK"/>
+                <constraint firstItem="cJr-CK-q5W" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="100" id="zuh-Wf-jvj"/>
+            </constraints>
+            <size key="customSize" width="387" height="256"/>
+            <connections>
+                <outlet property="commanderView" destination="XTt-pt-Aym" id="gE7-oZ-e6h"/>
+                <outlet property="playerLifeLabel" destination="hBo-wE-6OQ" id="XI6-M6-Vw4"/>
+                <outlet property="playerNameLabel" destination="uIr-tw-hQg" id="tco-Wa-2Tc"/>
+                <outlet property="playerPoisonCountersLabel" destination="UUU-Fg-37G" id="CUk-Mj-E7Q"/>
+                <outlet property="poisonView" destination="LeS-xN-XYy" id="cex-6w-bIV"/>
+            </connections>
+            <point key="canvasLocation" x="172.5" y="269"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="EDHButton" width="46" height="50"/>
+        <image name="LifePoison" width="24" height="24"/>
+    </resources>
+</document>

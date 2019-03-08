@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+	width="58.788" height="50.001">
+	<style>g { display: none; }g.default { display: inline; }g.def { display: inline; }g:target { display: inline; }</style>
+	<radialGradient id="uncommon_grad" xlink:href="#grad">
+		<stop style="stop-color:#d9eaf3" offset="0" />
+		<stop style="stop-color:#99aebc" offset="0.69101" />
+		<stop style="stop-color:#536e78" offset="1" />
+	</radialGradient>
+	<radialGradient id="rare_grad" xlink:href="#grad">
+		<stop style="stop-color:#ebd491" offset="0" />
+		<stop style="stop-color:#d2bb7b" offset="0.69101" />
+		<stop style="stop-color:#8b723c" offset="1" />
+	</radialGradient>
+	<radialGradient id="mythic_grad" xlink:href="#grad">
+		<stop style="stop-color:#f6b91d" offset="0" />
+		<stop style="stop-color:#d3641c" offset="0.69101" />
+		<stop style="stop-color:#bf331c" offset="1" />
+	</radialGradient>
+	<radialGradient id="time_grad" xlink:href="#grad">
+		<stop style="stop-color:#bf99c3" offset="0" />
+		<stop style="stop-color:#7b5190" offset="0.69101" />
+		<stop style="stop-color:#612c75" offset="1" />
+	</radialGradient>
+	<radialGradient id="grad"
+		cx="-50.3105" cy="117.9463" r="1.2497"
+		gradientUnits="userSpaceOnUse"
+		gradientTransform="matrix(17.5713 0 0 -17.5713 913.412 2097.533)"/>
+	<path id="path1d" d="M41.089,0H17.595l-0.112,0.015c-1.584,0.168-3.78,1.313-4.513,3.712c-1.993,0.558-9.499,2.649-9.499,2.649L3.376,6.411C2.084,6.907,0,8.577,0,11.634c0,0.548,0.068,1.141,0.217,1.777L9.18,46.867l0.246,0.329c1.014,1.351,3.481,3.426,6.298,2.621c0,0,12.636-3.476,13.679-3.761c1.041,0.285,13.691,3.766,13.691,3.766c2.798,0.8,5.264-1.273,6.278-2.626l0.247-0.329l8.946-33.395c0.153-0.653,0.223-1.261,0.223-1.821c0-3.08-2.075-4.745-3.364-5.24l-0.095-0.035c0,0-7.507-2.092-9.5-2.649c-0.732-2.399-2.929-3.544-4.514-3.716L41.203,0H41.089z"/>
+	<path id="path2d" d="M17.71,2.13c0,0-2.879,0.309-2.879,3.289L4.141,8.4c0,0-2.674,1.027-1.852,4.521l8.841,32.997c0,0,1.851,2.468,4.009,1.853l14.264-3.924l14.258,3.924c2.157,0.615,4.009-1.853,4.009-1.853l8.841-32.997C57.331,9.428,54.661,8.4,54.661,8.4L43.969,5.419c0-2.98-2.88-3.289-2.88-3.289H17.71z"/>
+	<path id="path3d" d="M17.804,3.363c-0.136,0.024-0.548,0.114-0.937,0.374c-0.549,0.369-0.803,0.902-0.803,1.682v0.938c0,0-11.346,3.164-11.51,3.208c-0.296,0.139-1.188,0.674-1.188,2.095c0,0.288,0.038,0.61,0.123,0.975c0.016,0.059,8.621,32.185,8.761,32.702c0.381,0.428,1.496,1.547,2.549,1.248l14.603-4.019l14.597,4.019c1.054,0.299,2.168-0.82,2.549-1.248c0.14-0.518,8.747-32.644,8.763-32.702c0.084-0.364,0.122-0.687,0.122-0.975c0-1.421-0.893-1.956-1.188-2.095c-0.162-0.044-11.511-3.208-11.511-3.208V5.419c0-0.779-0.256-1.313-0.802-1.682c-0.388-0.26-0.801-0.35-0.938-0.374H17.804z"/>
+	<path id="path4d" d="M17.939,4.906h22.957c0.48,0,0.547,0.614,0.547,0.614v34.129c0,0.549-0.547,0.685-0.547,0.685H17.939c-0.479,0-0.479-0.685-0.479-0.685V5.521C17.461,5.111,17.939,4.906,17.939,4.906 M5.397,10.868c-0.821,0.273-0.479,1.302-0.479,1.302l8.77,32.551c0.345,0.751,1.03,0.41,1.03,0.41l11.925-3.288h-8.909c-1.646,0-1.919-2.058-1.919-2.058V8.056L5.397,10.868z M42.983,7.987v31.729c0,0-0.274,2.056-1.919,2.056h-8.907l11.922,3.29c0,0,0.686,0.345,1.028-0.41l8.772-32.554c0,0,0.343-1.027-0.48-1.299L42.983,7.987z"/>
+	<path id="path5d" d="M25.332,10.011c-1.519,1.161-2.153,2.587-2.887,4.239l-0.327,0.738l1.938,0.85l0.371-0.574c0.617-0.957,1.766-2.738,4.253-2.738c2.119,0,2.874,1.484,2.874,2.874c0,2.202-1.768,3.808-2.811,4.41c-0.76,0.413-1.604,0.69-2.399,0.927l-0.726,0.215l0.417,1.799l0.613,0.024c1.711,0.069,3.188,0.128,4.738,1.392c1.238,0.983,1.81,2.18,1.81,3.771c0,3.217-2.591,5.553-6.16,5.553c-2.212,0-3.682-0.848-4.561-1.355l-0.63-0.366l-1.215,1.692l0.56,0.48c0.965,0.828,3.228,2.764,7.134,2.764c5.445,0,9.552-3.968,9.552-9.232c0-3.947-2.521-6.089-3.296-6.651c-0.393-0.27-0.806-0.497-1.223-0.702c0.914-0.72,1.794-1.647,2.334-3.206c0.266-0.756,0.4-1.555,0.4-2.37c0-3.392-2.757-5.947-6.411-5.947C28.035,8.595,26.531,9.086,25.332,10.011"/>
+	<path id="path6d" d="M28.323,36.205c-3.718,0-5.88-1.854-6.804-2.645l-0.212-0.184l0.68-0.95l0.241,0.139c0.856,0.496,2.452,1.424,4.811,1.424c3.858,0,6.657-2.544,6.657-6.053c0-1.756-0.637-3.078-2.002-4.161c-1.67-1.367-3.3-1.434-5.024-1.501l-0.234-0.007l-0.222-0.971l0.271-0.08c0.83-0.247,1.706-0.535,2.497-0.97c1.145-0.659,3.068-2.414,3.068-4.849c0-1.557-0.881-3.375-3.371-3.375c-2.749,0-4.046,2-4.668,2.96l-0.145,0.226l-1.091-0.475l0.127-0.282c0.704-1.587,1.313-2.958,2.732-4.044c1.112-0.861,2.512-1.314,4.045-1.314c3.371,0,5.911,2.344,5.911,5.449c0,0.756-0.125,1.496-0.373,2.203c-0.533,1.549-1.44,2.406-2.171,2.979l-0.621,0.491l0.713,0.353c0.462,0.229,0.831,0.438,1.156,0.664c0.715,0.52,3.082,2.522,3.082,6.241C37.378,32.45,33.484,36.205,28.323,36.205"/>
+	<g id="C" class="default">
+		<use xlink:href="#path1d" style="fill:#ffffff"/>
+		<use xlink:href="#path2d" />
+		<use xlink:href="#path3d" style="fill:#ffffff"/>
+		<use xlink:href="#path4d" />
+		<use xlink:href="#path5d" style="fill:#ffffff"/>
+		<use xlink:href="#path6d" style="fill:#ffffff"/></g>
+	<g id="80">
+		<use xlink:href="#path1d" style="fill:#808080"/>
+		<use xlink:href="#path2d" />
+		<use xlink:href="#path3d" style="fill:#808080"/>
+		<use xlink:href="#path4d" />
+		<use xlink:href="#path5d" style="fill:#808080"/>
+		<use xlink:href="#path6d" style="fill:#808080"/></g>
+	<g id="U">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#uncommon_grad)"/>
+		<use xlink:href="#path3d" />
+		<use xlink:href="#path4d" style="fill:url(#uncommon_grad)"/>
+		<use xlink:href="#path5d" style="fill:#536e78"/>
+		<use xlink:href="#path6d" /></g>
+	<g id="R">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#rare_grad)"/>
+		<use xlink:href="#path3d" />
+		<use xlink:href="#path4d" style="fill:url(#rare_grad)"/>
+		<use xlink:href="#path5d" style="fill:#8b723c"/>
+		<use xlink:href="#path6d" /></g>
+	<g id="M">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#mythic_grad)"/>
+		<use xlink:href="#path3d" />
+		<use xlink:href="#path4d" style="fill:url(#mythic_grad)"/>
+		<use xlink:href="#path5d" style="fill:#bf331c"/>
+		<use xlink:href="#path6d" /></g>
+	<g id="T">
+		<use xlink:href="#path1d" style="fill:#ffffff"/>
+		<use xlink:href="#path2d" style="fill:url(#time_grad)"/>
+		<use xlink:href="#path3d" style="fill:#ffffff"/>
+		<use xlink:href="#path4d" style="fill:url(#time_grad)"/>
+		<use xlink:href="#path5d" style="fill:#612c75"/>
+		<use xlink:href="#path6d" style="fill:#ffffff"/></g>
+</svg>

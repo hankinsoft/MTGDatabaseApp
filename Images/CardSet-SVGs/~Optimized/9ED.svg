@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+	width="600" height="503.24957">
+	<style>g { display: none; }g.default { display: inline; }g.def { display: inline; }g:target { display: inline; }</style>
+	<linearGradient id="uncommon_grad" xlink:href="#grad">
+		<stop style="stop-color:#536e78" offset="0" />
+		<stop style="stop-color:#99aebc" offset="0.30000299" />
+		<stop style="stop-color:#d9eaf3" offset="0.5" />
+		<stop style="stop-color:#99aebc" offset="0.69999701" />
+		<stop style="stop-color:#536e78" offset="1" />
+	</linearGradient>
+	<linearGradient id="rare_grad" xlink:href="#grad">
+		<stop style="stop-color:#8b723c" offset="0" />
+		<stop style="stop-color:#d2bb7b" offset="0.30000299" />
+		<stop style="stop-color:#ebd491" offset="0.5" />
+		<stop style="stop-color:#d2bb7b" offset="0.69999701" />
+		<stop style="stop-color:#8b723c" offset="1" />
+	</linearGradient>
+	<linearGradient id="mythic_grad" xlink:href="#grad">
+		<stop style="stop-color:#bf331c" offset="0" />
+		<stop style="stop-color:#d3641c" offset="0.30000299" />
+		<stop style="stop-color:#f6b91d" offset="0.5" />
+		<stop style="stop-color:#d3641c" offset="0.69999701" />
+		<stop style="stop-color:#bf331c" offset="1" />
+	</linearGradient>
+	<linearGradient id="time_grad" xlink:href="#grad">
+		<stop style="stop-color:#612c75" offset="0" />
+		<stop style="stop-color:#7b5190" offset="0.30000299" />
+		<stop style="stop-color:#bf99c3" offset="0.5" />
+		<stop style="stop-color:#7b5190" offset="0.69999701" />
+		<stop style="stop-color:#612c75" offset="1" />
+	</linearGradient>
+	<linearGradient id="grad"
+		x1="0" y1="0" x2="1" y2="0"
+		gradientUnits="userSpaceOnUse"
+		gradientTransform="matrix(405.55159,405.55159,-405.55159,405.55159,97.244769,33.40747)"/>
+	<path id="path1d" d="m 171.43896,0 c 0,0 -31.70179,3.38336 -31.70179,36.15792 L 22.089835,68.98749 c 0,0 -29.3911998,11.27786 -20.3689098,49.74636 L 99.013085,481.75713 c 0,0 20.368925,27.17689 44.107445,20.41018 l 156.94103,-43.19971 156.87227,43.19971 c 23.73852,6.76671 44.10743,-20.41018 44.10743,-20.41018 L 598.27842,118.73385 C 607.3007,80.26535 577.92325,68.98749 577.92325,68.98749 L 460.31719,36.15792 C 460.31719,3.38336 428.6154,0 428.6154,0 L 171.43896,0 z"/>
+	<path id="path2d" d="m 173.96983,30.518963 c 0,0 -5.3226,2.255571 -5.3226,6.766715 v 0 375.538962 c 0,0 0,7.52316 5.3226,7.52316 v 0 h 252.55529 c 0,0 6.01027,-1.55415 6.01027,-7.52316 v 0 -375.538962 c 0,0 -0.74269,-6.766715 -6.01027,-6.766715 v 0 z m 275.4961,383.007107 c 0,0 -2.957,22.61073 -21.05659,22.61073 v 0 h -98.04861 l 131.19452,36.21293 c 0,0 7.52315,3.7547 11.27786,-4.51114 v 0 l 96.54947,-358.12705 c 0,0 3.75471,-11.332873 -5.26758,-14.344886 v 0 L 449.46593,64.476322 Z M 35.939838,96.123096 c -9.022287,2.99826 -5.253832,14.344884 -5.253832,14.344884 v 0 l 96.480714,358.07204 c 3.82347,8.32086 11.33287,4.56615 11.33287,4.56615 v 0 l 131.15325,-36.15791 h -97.99359 c -18.11334,0 -21.12536,-22.6795 -21.12536,-22.6795 v 0 -349.035996 z" />
+	<path id="path3d" d="m 349.47784,207.70516 c 6.39537,-19.02108 9.61368,-35.93787 9.61368,-50.72286 0,-17.50819 -4.07103,-31.85308 -12.18559,-43.07592 -8.11455,-11.29162 -18.42967,-16.93055 -31.00035,-16.93055 -15.95405,0 -29.28118,8.76098 -39.96764,26.26916 -10.70021,17.57696 -16.00906,37.6708 -16.00906,60.28154 0,15.5827 3.86473,27.28691 11.48417,34.97511 7.68819,7.74322 17.04057,11.60795 28.09837,11.60795 8.92601,0 17.57695,-1.88423 25.89781,-5.58392 8.33462,-3.76846 16.33915,-9.35237 24.06861,-16.82051 m -133.12,151.23334 -10.96153,-11.49792 c 63.16976,-17.89329 108.30871,-56.25176 135.33431,-115.18545 -9.4624,7.04178 -18.86979,12.30937 -28.2084,15.89903 -9.40739,3.5484 -18.75976,5.3226 -28.04336,5.3226 -19.83253,0 -35.19517,-6.56041 -46.21172,-19.7225 -11.0578,-13.2171 -16.54544,-28.84106 -16.54544,-47.10569 0,-25.69152 9.02229,-49.54006 27.13563,-71.51813 18.09959,-22.01934 40.55903,-33.03588 67.30956,-33.03588 23.97233,0 43.03466,8.70596 57.17325,26.10412 14.12483,17.3569 21.16662,39.0599 21.16662,64.9027 0,41.10917 -18.00332,81.02179 -54.05121,119.91665 -35.99288,38.94988 -77.36336,60.92795 -124.09771,65.92047"/>
+	<g id="C" class="default">
+		<use xlink:href="#path1d" style="fill:#ffffff"/>
+		<use xlink:href="#path2d" />
+		<use xlink:href="#path3d" style="fill:#ffffff"/></g>
+	<g id="80">
+		<use xlink:href="#path1d" style="fill:#808080"/>
+		<use xlink:href="#path2d" />
+		<use xlink:href="#path3d" style="fill:#808080"/></g>
+	<g id="U">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#uncommon_grad)"/>
+		<use xlink:href="#path3d" /></g>
+	<g id="R">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#rare_grad)"/>
+		<use xlink:href="#path3d" /></g>
+	<g id="M">
+		<use xlink:href="#path1d" />
+		<use xlink:href="#path2d" style="fill:url(#mythic_grad)"/>
+		<use xlink:href="#path3d" /></g>
+	<g id="T">
+		<use xlink:href="#path1d" style="fill:#ffffff"/>
+		<use xlink:href="#path2d" style="fill:url(#time_grad)"/>
+		<use xlink:href="#path3d" style="fill:#ffffff"/></g>
+</svg>

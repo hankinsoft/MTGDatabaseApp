@@ -1,0 +1,101 @@
+Read Me
+=====================
+
+**If you use MTStatusBarOverlay in your app, please drop me a line so that I can add your app here!**
+
+UIStatusBarStyleDefault (left: full size, right: shrinked)
+
+![Default style](https://img.skitch.com/20101223-r1ddre3u4sjmn4htkqw3bhp84j.jpg "Default style")
+
+Description
+-----------------
+
+This class provides a custom iOS (iPhone + iPad) status bar overlay window known from Apps like Reeder, Google Mobile App or Evernote.
+It currently supports touch-handling, queuing of messages, delegation as well as three different animation modes:
+ 
+* MTStatusBarOverlayAnimationShrink: When the user touches the overlay the overlay shrinks and only covers the battery-icon on the right side
+* MTStatusBarOverlayAnimationFallDown: When the user touches the overlay a detail view falls down where additional information can be displayed. You can get a history of all your displayed messages for free by enabling historyTracking!
+* MTStatusBarOverlayAnimationNone: Nothing happens, when the user touches the overlay
+
+MTStatusBarOverlay currently fully supports two different status bar styles, which also can be changed in your app (MTStatusBarOverlay will adopt the style and will be updated the next time you show it):
+
+* UIStatusBarStyleDefault
+* UIStatusBarStyleBlackOpaque
+
+Usage
+------------------
+
+You can use the custom status bar like this:
+
+     MTStatusBarOverlay *overlay = [MTStatusBarOverlay sharedInstance];
+	 overlay.animation = MTStatusBarOverlayAnimationFallDown;  // MTStatusBarOverlayAnimationShrink
+	 overlay.detailViewMode = MTDetailViewModeHistory;         // enable automatic history-tracking and show in detail-view
+	 overlay.delegate = self;
+	 overlay.progress = 0.0;
+     [overlay postMessage:@"Following @myell0w on Twitter…"];
+     overlay.progress = 0.1;
+ 	 // ...
+     [overlay postMessage:@"Following myell0w on Github…" animated:NO];
+     overlay.progress = 0.5;
+   	 // ...
+     [overlay postImmediateFinishMessage:@"Following was a good idea!" duration:2.0 animated:YES];
+     overlay.progress = 1.0;
+
+
+Adding MTStatusBarOverlay to your project
+------------------
+MTStatusBarOverlay is compiled as a static library. You have two options for integrating it into you own project, after cloning the MTStatusBarOverlay git repository with the terminal-command: `git clone git://github.com/myell0w/MTStatusBarOverlay.git`
+Since MTStatusBarOverlay now uses ARC, you have to add "-fobjc-arc" to "Other Linker Flags" of your project, If you are using Xcode 4.2 or up with the iOS 5.0 SDK on a non-ARC target.
+
+#### First option: copy files
+1. Just copy over the files MTStatusBarOverlay.h and MTStatusBarOverlay.m to your project.
+2. import "MTStatusBarOverlay.h" everywhere where you want to use it
+3. If you use MTStatusBarOverlay in a non-ARC project, add "-fobjc-arc" to the Compiler Flags of MTStatusBarOverlay.m in your target's "Build Phases" tab under Compile Sources.
+4. If your project doesn't use ARC be sure to check out the introduction section of "Adding MTStatusBarOverlay to your project"
+5. There is no step 5 :)
+
+#### Second option: Xcode dependent project
+1. Locate the "MTStatusBarOverlay.xcodeproj" file and drag itonto the root of your Xcode project's "Groups and Files"  sidebar.  A dialog will appear -- make sure "Copy items" is unchecked and "Reference Type" is "Relative to Project" before clicking "Add".
+2. Add MTStatusBarOverlay as a direct dependency (Xcode 3) or target dependency (Xcode 4) of your target
+3. Drag libMTStatusBarOverlay.a onto the section 'Link Binary with Libraries' of your target
+4. Finally, you need to tell your project where to find the MTStatusBarOverlay-header. Open your "Project Settings" and go to the "Build" tab. Look for "Header Search Paths" and double-click it.  Add the relative path from your project's directory to the MTStatusBarOverlay-directory.
+5. If your project doesn't use ARC be sure to check out the introduction section of "Adding MTStatusBarOverlay to your project"
+6. You are good to go, just #import "MTStatusBarOverlay.h" everywhere where you want to use it.
+
+
+Known Limitations
+----------------------- 
+* When using UIStatusBarStyleBlackTranslutient the overlay is black opaque
+* User interaction in detail view is not possible yet
+
+
+More Screenshots
+------------------------
+
+UIStatusBarStyleBlackOpaque (left: activity indicator, right: finished-indicator)
+
+![Black style](https://img.skitch.com/20101223-rj8s32db61cb29w7k3fbpahktg.jpg "Black style")
+
+UIStatusBarStyleDefault, Landscape
+
+![Default style landscape](https://img.skitch.com/20101223-8ibm6egd7mu3fd8andgmtw9by5.jpg "Default style landscape")
+
+UIStatusBarStyleDefault, detail view visible
+
+![History tracking:](https://img.skitch.com/20101226-b1k5hjbmfyepd2mh6nbdbgw6a4.jpg "History tracking")
+
+UIStatusBarStyleBlackOpaque, Progress visible
+
+![History tracking:](https://img.skitch.com/20110223-rm4mjnn7w2yp4qeuactjfiiah5.png "History tracking")
+
+
+Apps using MTStatusBarOverlay
+------------------------
+* [Öffnungszeiten Österreich](http://www.oeffnungszeitenapp.at/ "oeffnungszeitenapp.at")
+* GoDenmark
+* [Anytune](http://bit.ly/anytune-itunes-preview "Anytune")
+* [Nowplayer](http://itunes.apple.com/us/app/nowplayer/id438805892?mt=8&ls=1 "Nowplayer")
+* [Amano Media](http://www.amanomedia.at/ "Amano Media")
+* [EconTalk Companion](http://itunes.apple.com/us/app/econtalk-companion/id456671102?mt=8 "EconTalk Companion")
+* [Dropshop](http://itunes.apple.com/us/app/dropshop/id425751374?l=sv&ls=1&mt=8 "Dropshop")
+* lots of other Apps I don't know :)

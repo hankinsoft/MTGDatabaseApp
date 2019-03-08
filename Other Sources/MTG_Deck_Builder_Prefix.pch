@@ -1,0 +1,55 @@
+//
+// Prefix header for all source files of the 'MTG Deck Builder' target in the 'MTG Deck Builder' project
+//
+#import <Availability.h>
+
+#ifndef __IPHONE_3_2
+#warning "This project uses features only available in iPhone SDK 3.2 and later."
+#endif
+
+
+#ifdef __OBJC__
+    @import SCLAlertViewFramework;
+    @import MobileCoreServices;
+
+    #import <SystemConfiguration/SystemConfiguration.h>
+
+    #import <CocoaLumberjack/DDLogMacros.h>
+    static const DDLogLevel ddLogLevel = DDLogFlagError | DDLogFlagInfo;
+    #define LOG_LEVEL_DEF ddLogLevel
+
+    #import <CocoaLumberjack/CocoaLumberjack.h>
+
+    #define NSLog                   DDLogInfo
+
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+    #import "AppDelegate.h"
+    #import "SQLProAppearanceManager.h"
+    #import "MTGNavigationController.h"
+
+    #import "MTStatusBarOverlay.h"
+    #import "MachTimer.h"
+    #import "HSLogHelper.h"
+    #import "HSSemaphore.h"
+    #import "Weakify.h"
+
+    #import "NSString+Hex.h"
+    #import "NSMutableArray+Reverse.h"
+    #import "UIColor+Hex.h"
+    #import "GDataXMLNode.h"
+
+    #import "ShakeToRootViewController.h"
+
+#define DATABASE_VERSION_KEY @"DatabaseVersion"
+
+#define IS_IPHONEX (MAX(CGRectGetWidth([[UIScreen mainScreen] bounds]), CGRectGetHeight([[UIScreen mainScreen] bounds])) == 812)
+
+#define INTERFACE_IS_PAD     ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) 
+#define INTERFACE_IS_PHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
+
+#define TICK      NSDate *startTime = [NSDate date]
+#define TOCK(msg)   NSLog(@"%s - %@ Time: %f", __func__, (msg), -[startTime timeIntervalSinceNow])
+
+#endif

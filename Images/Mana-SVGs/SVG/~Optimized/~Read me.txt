@@ -1,0 +1,12 @@
+These files are optimized for browsers, simply add #rarity and the end of a url to choose a gradiant.
+ - Each path much have a fill designated at the bottom of the file for each rarity and an ID.
+ - Each file will have 6 options options:
+      #C (default)
+      #80
+      #U
+      #R
+      #M
+      #T
+ - Other symbols that have no gradiants will not be created
+
+AKH was a pain in the ass...
