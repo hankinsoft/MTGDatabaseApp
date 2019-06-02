@@ -1,9 +1,9 @@
 language: objective-c
 osx_image: xcode10.2
 
-before_install:
- - brew install carthage || true
- - brew outdated carthage || brew upgrade carthage
+# before_install:
+# - brew install carthage || true
+# - brew outdated carthage || brew upgrade carthage
 
 before_script:
  - carthage bootstrap --platform iOS --no-use-binaries --cache-builds
