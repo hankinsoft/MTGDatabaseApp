@@ -263,8 +263,8 @@
 		72584F152232EE7400E4B47C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		72584F162232EE7500E4B47C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		72584F182232EEA400E4B47C /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		72584F1A2232EEFE00E4B47C /* NSMutableArray+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Reverse.h"; path = "../../../HSCore/HSCore/Category/NSMutableArray/NSMutableArray+Reverse.h"; sourceTree = "<group>"; };
-		72584F1B2232EEFF00E4B47C /* NSMutableArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Reverse.m"; path = "../../../HSCore/HSCore/Category/NSMutableArray/NSMutableArray+Reverse.m"; sourceTree = "<group>"; };
+		72584F1A2232EEFE00E4B47C /* NSMutableArray+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Reverse.h"; sourceTree = "<group>"; };
+		72584F1B2232EEFF00E4B47C /* NSMutableArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Reverse.m"; sourceTree = "<group>"; };
 		725AAEBA1205E9CE00E5DFC1 /* UISetTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISetTableCell.h; sourceTree = "<group>"; };
 		725AAEBB1205E9CE00E5DFC1 /* UISetTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISetTableCell.m; sourceTree = "<group>"; };
 		725AC39319CCB372009A8F5D /* GHPushedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushedViewController.h; sourceTree = "<group>"; };
