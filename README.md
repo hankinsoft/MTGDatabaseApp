@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hankinsoft/MTGDatabaseApp.svg?branch=master)](https://travis-ci.org/hankinsoft/MTGDatabaseApp)
+
 # MTGDatabaseApp
 MTG database app
 
