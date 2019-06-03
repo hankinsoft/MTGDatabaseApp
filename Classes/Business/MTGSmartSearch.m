@@ -259,16 +259,14 @@
 {
     if(0 == smartSearch.customOrderBy.length)
     {
-        NSString * searchClause =
-            [MTGSmartSearch buildSmartSearchClause: smartSearch];
+        NSString * searchClause = [MTGSmartSearch buildSmartSearchClause: smartSearch];
 
         return [MTGCard loadCardsWithClause: searchClause
                                       limit: limit];
     }
     else
     {
-        NSString * searchClause =
-            [MTGSmartSearch buildSmartSearchClause: smartSearch];
+        NSString * searchClause = [MTGSmartSearch buildSmartSearchClause: smartSearch];
 
         return [MTGCard loadCardsWithClause: searchClause
                                     orderBy: smartSearch.customOrderBy
@@ -278,8 +276,7 @@
 
 + (NSUInteger) countWithSmartSearch: (MTGSmartSearch*) smartSearch
 {
-    NSUInteger result =
-        [MTGCard countCardWithClause: [MTGSmartSearch buildSmartSearchClause: smartSearch]];
+    NSUInteger result = [MTGCard countCardWithClause: [MTGSmartSearch buildSmartSearchClause: smartSearch]];
 
     return result;
 }

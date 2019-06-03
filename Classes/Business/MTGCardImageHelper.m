@@ -33,7 +33,7 @@ static NSComparisonResult compareStrings(NSString* _Nonnull obj1, NSString * _No
                                                                     includingPropertiesForKeys: @[]
                                                                                        options: NSDirectoryEnumerationSkipsHiddenFiles
                                                                                          error:nil];
-        
+
         NSMutableArray *cardImages = @[].mutableCopy;
         for(NSURL * card in directoryContents)
         {
@@ -64,7 +64,9 @@ static NSComparisonResult compareStrings(NSString* _Nonnull obj1, NSString * _No
         } // End of we have an image
     }
 
-    NSString * imageString = [NSString stringWithFormat: @"https://d3q4lmojzu06l8.cloudfront.net/raw2/%@", imageName];
+    // Try to load from scryfall.com
+    NSString * imageString = [NSString stringWithFormat: @"https://api.scryfall.com/cards/multiverse/%ld?format=image&version=border_crop", multiverseId];
+
     NSURL * imageURL = [NSURL URLWithString: imageString];
 
     // Clear the image before load

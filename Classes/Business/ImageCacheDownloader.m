@@ -60,26 +60,39 @@ static NSOperationQueue * downloadQueue = nil;
 
         NSLog(@"FileList count:  %ld", (long) fileList.count);
     } // End of autorelease
-
+#if todo
     [[AppDelegate databaseQueue] inDatabase: ^(FMDatabase * database) {
-        FMResultSet * results = [database executeQuery: @"SELECT DISTINCT multiverseId FROM card"];
+        FMResultSet * results = [database executeQuery: @"SELECT DISTINCT multiverseId, collectorsNumber, cardSet.shortName FROM card INNER JOIN cardSet ON card.cardSetId = card.cardSetId;"];
 
         while ([results next])
         {
             NSInteger multiverseId = (NSInteger)[results longForColumnIndex: 0];
+            NSInteger collectorsNumber = (NSInteger)[results longForColumnIndex: 1];
+            NSString * shortName = [results stringForColumnIndex: 2];
+
             NSBlockOperation * blockOperation = [NSBlockOperation blockOperationWithBlock: ^{
                 // Download the images
-                [self downloadImageForMultiverseId: multiverseId];
+                [self downloadImageForMultiverseId: multiverseId
+                                  cardSetShortName: shortName
+                                   cardNumberInSet: collectorsNumber];
             }];
 
             blockOperation.qualityOfService = NSQualityOfServiceBackground;
             [downloadQueue addOperation: blockOperation];
         } // End of while loop
     }];
+#endif
 } // End of startDownload
 
 + (void) downloadImageForMultiverseId: (NSInteger) multiverseId
+                     cardSetShortName: (NSString*) cardSetShortName
+                      cardNumberInSet: (NSUInteger) cardNumberInSet
 {
+    // Try to load from scryfall.com
+    NSString * imageString = [NSString stringWithFormat: @"https://img.scryfall.com/cards/png/en/%@/%ld.png", cardSetShortName.lowercaseString, cardNumberInSet];
+    
+    NSURL * imageURL = [NSURL URLWithString: imageString];
+
     NSString * fileName = [NSString stringWithFormat: @"%ld.jpg", (long)multiverseId];
     NSString * path = [NSString stringWithFormat: @"%@/%@", [AppDelegate cardsPath], fileName];
 

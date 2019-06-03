@@ -28,7 +28,7 @@
 
         NSUInteger count = [MTGSmartSearch countWithSmartSearch: smartSearch];
         NSArray * cards  = [MTGSmartSearch searchWithSmartSearch: smartSearch
-                                                       limit: NSMakeRange(0, 5000)];
+                                                           limit: NSMakeRange(0, 5000)];
 
         if(!self->cancelled && nil != self.delegate)
         {

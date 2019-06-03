@@ -141,7 +141,8 @@
         query = [query stringByAppendingString: @" INNER JOIN card_format ON card_format.multiverseId = card.multiverseId INNER JOIN format ON card_format.formatId = format.formatId"];
     }
 
-    if(NSNotFound != [clause rangeOfString: @"cardSet" options:NSCaseInsensitiveSearch].location)
+    if(NSNotFound != [clause rangeOfString: @"cardSet" options:NSCaseInsensitiveSearch].location ||
+       NSNotFound != [orderBy rangeOfString: @"cardSet" options:NSCaseInsensitiveSearch].location)
     {
         query = [query stringByAppendingString: @" INNER JOIN cardSet ON cardSet.cardSetId = card.cardSetId"];
     }
@@ -157,10 +158,7 @@
         query = [query stringByAppendingFormat: @" ORDER BY %@", orderBy];
     } // End of we have no order by
 
-    query =
-        [query stringByAppendingFormat: @" LIMIT %ld, %ld",
-            (unsigned long)limit.location,
-            (unsigned long)limit.length];
+    query = [query stringByAppendingFormat: @" LIMIT %ld, %ld", (unsigned long)limit.location, (unsigned long)limit.length];
 
 //	NSLog( @"Running query (loadCardsWithClause): %@", query );
 
@@ -173,7 +171,7 @@
     {
         NSError * error = nil;
         FMResultSet * results = [database executeQuery: query
-                                 values: nil
+                                                values: nil
                                                  error: &error];
 
         if(error)

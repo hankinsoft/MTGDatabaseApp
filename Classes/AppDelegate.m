@@ -189,7 +189,12 @@ didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
                          ].mutableCopy;
 
     browseCardsViewController = [[CardGridViewController alloc] initWithRevealBlock: revealBlock];
-    browseCardsViewController.smartSearch = [[MTGSmartSearch alloc] init];
+
+    // Default the smart search to be the latest cards released
+    MTGSmartSearch * smartSearch = [[MTGSmartSearch alloc] init];
+    smartSearch.customOrderBy = @"cardSet.releaseDate DESC, collectorsNumber DESC";
+
+    browseCardsViewController.smartSearch = smartSearch;
 
     browseSetViewController = [[BrowseSetViewController alloc] initWithRevealBlock: revealBlock];
 
