@@ -24,6 +24,7 @@
         {
             _sort = @{
                       @(MTGSortByName): @"Name",
+                      @(MTGSortByReleaseDate): @"Release Date",
                       @(MTGSortByCollectorsNumber): @"Collectors Number",
                       @(MTGSortByConvertedManaCost): @"Converted Mana Cost",
                       @(MTGSortByPrice): @"Price",
@@ -53,7 +54,7 @@
     }
     else
     {
-        sortMode = MTGSortModeAscending;
+        sortMode = MTGSortModeDescending;
     }
 
     return sortMode;
@@ -72,7 +73,7 @@
     }
     else
     {
-        sortBy = MTGSortByName;
+        sortBy = MTGSortByReleaseDate;
     }
 
     return sortBy;

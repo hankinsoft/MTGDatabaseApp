@@ -190,10 +190,9 @@ didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
 
     browseCardsViewController = [[CardGridViewController alloc] initWithRevealBlock: revealBlock];
 
-    // Default the smart search to be the latest cards released
+    // Note - no need to customize the smart search default. It will use the users
+    // saved preference, or if none exist than the default sort order.
     MTGSmartSearch * smartSearch = [[MTGSmartSearch alloc] init];
-    smartSearch.customOrderBy = @"cardSet.releaseDate DESC, collectorsNumber DESC";
-
     browseCardsViewController.smartSearch = smartSearch;
 
     browseSetViewController = [[BrowseSetViewController alloc] initWithRevealBlock: revealBlock];

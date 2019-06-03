@@ -85,8 +85,7 @@
 + (NSArray*) loadCardsWithClause: (NSString*) clause
                            limit: (NSRange) limit
 {
-    NSString * sortMode =
-        MTGSortModeAscending == [MTGCardSortOptionsViewController sortMode] ? @"ASC" : @"DESC";
+    NSString * sortMode = MTGSortModeAscending == [MTGCardSortOptionsViewController sortMode] ? @"ASC" : @"DESC";
 
     if(nil == clause)
     {
@@ -118,6 +117,9 @@
         case MTGSortByToughness:
             clause = [clause stringByAppendingFormat: @" AND toughness IS NOT NULL"];
             orderBy = [NSString stringWithFormat: @"CAST(toughness AS FLOAT) %@, toughness %@, card.name ASC", sortMode, sortMode];
+            break;
+        case MTGSortByReleaseDate:
+            orderBy = [NSString stringWithFormat: @"cardSet.releaseDate %@, card.name ASC", sortMode];
             break;
     }
 

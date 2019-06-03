@@ -22,7 +22,8 @@ typedef enum MTGSortBy
     MTGSortByPrice                  = 3,
     MTGSortByRarity                 = 4,
     MTGSortByPower                  = 5,
-    MTGSortByToughness              = 6
+    MTGSortByToughness              = 6,
+    MTGSortByReleaseDate            = 7,
 } MTGSortBy;
 
 @protocol CardSortOptionsProtocol
