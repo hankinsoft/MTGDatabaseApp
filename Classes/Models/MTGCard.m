@@ -387,6 +387,7 @@
       @"{B}":@"cost_" SIZE "_black",
       @"{G}":@"cost_" SIZE "_green",
       @"{R}":@"cost_" SIZE "_red",
+      @"{S}":@"cost_" SIZE "_snow",
       
       @"{CHAOS}":@"cost_" SIZE "_chaos",
       @"{Infinity}":@"cost_" SIZE "_infinite",
@@ -488,6 +489,7 @@
       @"{B}":@"cost_" SIZE_RULES "_black",
       @"{G}":@"cost_" SIZE_RULES "_green",
       @"{R}":@"cost_" SIZE_RULES "_red",
+      @"{S}":@"cost_" SIZE_RULES "_snow",
 
       @"{CHAOS}":@"cost_" SIZE_RULES "_chaos",
       @"{Infinity}":@"cost_" SIZE_RULES "_infinite",
