@@ -66,18 +66,13 @@
 
 + (MTGCard*) cardWithMultiverseId: (NSInteger) multiverseId
 {
-	NSString * query = [NSString stringWithFormat: @"SELECT card.name FROM card WHERE multiverseId = %ld", (long)multiverseId];
+    MTGCard* card = nil;
 
-    __block MTGCard* card = nil;
+    NSString * clause = [NSString stringWithFormat: @"multiverseId = %ld", (long)multiverseId];
+    NSArray* cards = [self loadCardsWithClause: clause
+                                         limit: NSMakeRange(0, 1)];
 
-    [[AppDelegate databaseQueue] inDatabase: ^(FMDatabase * database) {
-        FMResultSet * results = [database executeQuery: query];
-		while ([results next])
-		{
-			card = [[MTGCard alloc] initWithMultiverseId: multiverseId
-                                                 name: [results stringForColumnIndex: 0]];
-		}
-    }]; // End of query
+    card = cards.firstObject;
 
     return card;
 } // End of cardWithMultiverseId

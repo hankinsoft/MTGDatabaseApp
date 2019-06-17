@@ -313,7 +313,7 @@ didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
     NSLog(@"Application became active");
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self performUpdates];
+        [MTGPriceManager beginUpdatePrices];
     });
 } // End of app became active
 
@@ -501,117 +501,6 @@ didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
     // returns the same object each time
     return dbQueue;
 }
-
-- (void) performUpdates
-{
-#if todo
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[MTStatusBarOverlay sharedInstance] postMessage: @"Checking for updates"
-                                                animated: YES];
-    });
-
-    NSData * result = [NSData dataWithContentsOfURL: [NSURL URLWithString:@"http://www.magicthegatheringdatabase.com/settings.php"]];
-
-    if(nil == result)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[MTStatusBarOverlay sharedInstance] hide];
-        });
-        return;
-    }
-
-    NSDictionary * JSON = [NSJSONSerialization JSONObjectWithData: result
-                                                          options: NSJSONReadingMutableContainers
-                                                            error: nil];
-
-    NSInteger remoteDatabaseVersion = [[JSON objectForKey: @"databaseVersion"] integerValue];
-    NSInteger currentDatabaseVersion = [[NSUserDefaults standardUserDefaults] integerForKey: DATABASE_VERSION_KEY];
-
-    NSLog(@"Remote database version is: %ld. Local version is: %ld",
-          (long)remoteDatabaseVersion, (long)currentDatabaseVersion);
-
-    // If we are already updating the database
-    if(0 != dispatch_semaphore_wait(databaseUpdateSemaphore, DISPATCH_TIME_NOW))
-    {
-        NSLog(@"Already updating. Not doing anything.");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[MTStatusBarOverlay sharedInstance] hide];
-        });
-        return;
-    } // End of updating
-
-    if(remoteDatabaseVersion > currentDatabaseVersion)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[MTStatusBarOverlay sharedInstance] hide];
-        });
-
-        dispatch_semaphore_signal(databaseUpdateSemaphore);
-#if TODO
-        updating = YES;
-
-        UpdateDatabaseViewController * updateDatabaseViewController = [[UpdateDatabaseViewController alloc] initWithNibName: @"UpdateDatabaseViewController" bundle: nil];
-
-        updateDatabaseViewController.onDatabaseReady = ^(NSString* databasePath)
-        {
-            [dbQueue close];
-
-            // Copy our database if we need.
-            [self copyDatabase: databasePath];
-
-            dbQueue = [FMDatabaseQueue databaseQueueWithPath: [AppDelegate getDBPath]/*
-                                                       flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_SHAREDCACHE*/];
-
-            [dbQueue inDatabase:
-             ^(FMDatabase * database) {
-                FMResultSet * results = [database executeQuery: @"SELECT DISTINCT value FROM settings WHERE name = 'databaseVersion'"];
-
-                while ([results next])
-                {
-                    NSString * temp = [results stringForColumnIndex: 0];
-
-                    [[NSUserDefaults standardUserDefaults] setInteger: temp.integerValue
-                                                               forKey: DATABASE_VERSION_KEY];
-
-                    NSLog(@"Settings database version to be: %@", temp);
-                }
-            }]; // End of query
-
-            // Get any new icons
-            [self getSetIcons];
-
-            // Update our cache
-            [browseSetViewController refreshCardCache];
-
-            dispatch_async(dispatch_get_global_group(0,0), ^{
-                // Update our prices
-                [PriceUpdater update];
-            });
-
-            updating = NO;
-        };
-
-        // Switch to our update screen
-        [self.revealController presentModalViewController: updateDatabaseViewController animated: YES];
-#endif
-    } // End of updateDatabase
-    else
-    {
-        // This is not a new database version. Update the price.
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[MTStatusBarOverlay sharedInstance] hide];
-        });
-
-        dispatch_semaphore_signal(databaseUpdateSemaphore);
-
-        dispatch_async(dispatch_get_global_queue(0,0), ^{
-            [NSThread sleepForTimeInterval: 5];
-            // Update our prices
-            [PriceUpdater update];
-        });
-    } // End of database is up to date
-#endif
-} // End of performUpdates
 
 - (void) getSetIcons
 {

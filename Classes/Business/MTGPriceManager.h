@@ -20,6 +20,10 @@
 
 @interface MTGPriceManager : NSObject
 
++ (NSString*) pricesUpdatedNotificationName;
+
++ (NSURL*) URLForPrices;
++ (void) beginUpdatePrices;
 + (MTGPriceForCard*) priceForMultiverseId: (NSUInteger) multiverseId;
 
 @end

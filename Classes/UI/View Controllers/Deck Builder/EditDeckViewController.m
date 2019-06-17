@@ -340,7 +340,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 
     DeckCardModifierCell * cell = (DeckCardModifierCell*) [tableView cellForRowAtIndexPath: indexPath];
 
-    MTGCard* selectedCard = [MTGCard cardWithMultiverseId: cell.multiverseId];
+    MTGCard * selectedCard = [MTGCard cardWithMultiverseId: cell.multiverseId];
 
     CardDetailsViewController * cardViewController = [[CardDetailsViewController alloc] init];
     cardViewController.card = selectedCard;

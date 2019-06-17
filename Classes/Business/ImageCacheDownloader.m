@@ -88,8 +88,9 @@ static NSOperationQueue * downloadQueue = nil;
                      cardSetShortName: (NSString*) cardSetShortName
                       cardNumberInSet: (NSUInteger) cardNumberInSet
 {
+#if TODO
     // Try to load from scryfall.com
-    NSString * imageString = [NSString stringWithFormat: @"https://img.scryfall.com/cards/png/en/%@/%ld.png", cardSetShortName.lowercaseString, cardNumberInSet];
+    NSString * imageString = [NSString stringWithFormat: @"https://img.scryfall.com/cards/png/en/%@/%lu.png", cardSetShortName.lowercaseString, (unsigned long)cardNumberInSet];
     
     NSURL * imageURL = [NSURL URLWithString: imageString];
 
@@ -111,6 +112,7 @@ static NSOperationQueue * downloadQueue = nil;
         [delegate imageCacheProgressChanged: 0];
     } // Write to file
 */
+#endif
 }
 
 @end

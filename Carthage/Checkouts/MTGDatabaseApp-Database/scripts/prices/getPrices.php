@@ -38,6 +38,7 @@
   // get all data row by row
   $query = 'SELECT card.multiverseId, card.name as cardName, cardSet.name AS setName FROM card INNER JOIN cardSet ON card.cardSetId = cardSet.cardSetId ';
 //  $query .= 'WHERE cardSet.cardSetId IN (209) ';
+//  $query .= ' WHERE card.multiverseId = 464143;';
 
   $query .= 'ORDER BY cardSet.name, card.multiverseId ASC';
   $results = $mtgdb->query($query) or die('mtgdb failed');

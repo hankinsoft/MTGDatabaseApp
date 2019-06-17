@@ -142,8 +142,8 @@ static NSString * cardSetPath = nil;
             }
 
             NSString * targetFileName = [NSString stringWithFormat: @"%@%@.png", setImage, retinaSuffix];
-            NSString * downloadPath = [NSString stringWithFormat: @"https://s3.amazonaws.com/mtgdb/setImages/%@", targetFileName];
-            
+            NSString * downloadPath = [NSString stringWithFormat: @"https://github.com/hankinsoft/MTGDatabaseApp/tree/master/Resources/CardSets/%@", targetFileName];
+
             NSURL * downloadURL = [NSURL URLWithString: downloadPath];
             NSData * iconData = [NSData dataWithContentsOfURL: downloadURL];
             if(iconData)

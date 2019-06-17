@@ -154,7 +154,6 @@
 		72F7955B11CE646A0031C6B5 /* MTGSmartSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F7955911CE646A0031C6B5 /* MTGSmartSearchViewController.m */; };
 		72FC31FE2058039100FBFB09 /* SQLProWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FC31FC2058039100FBFB09 /* SQLProWebViewController.m */; };
 		72FC320A205805E500FBFB09 /* SCLAlertViewFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FC3209205805E500FBFB09 /* SCLAlertViewFramework.framework */; };
-		72FE03D2139A40A100E3B14D /* PriceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FE03D1139A40A100E3B14D /* PriceUpdater.m */; };
 		72FEE5DE157D42B4005E1C85 /* Children.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FEE5DB157D42B4005E1C85 /* Children.m */; };
 		72FEE5DF157D42B4005E1C85 /* MTGRules.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FEE5DD157D42B4005E1C85 /* MTGRules.m */; };
 		72FEE5E2157D42FC005E1C85 /* MTGRules.json in Resources */ = {isa = PBXBuildFile; fileRef = 72FEE5E1157D42FC005E1C85 /* MTGRules.json */; };
@@ -409,8 +408,6 @@
 		72FC32052058053700FBFB09 /* RMStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RMStore.framework; path = Carthage/Build/iOS/RMStore.framework; sourceTree = "<group>"; };
 		72FC3207205805E200FBFB09 /* HSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HSCore.framework; path = Carthage/Build/iOS/HSCore.framework; sourceTree = "<group>"; };
 		72FC3209205805E500FBFB09 /* SCLAlertViewFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SCLAlertViewFramework.framework; path = Carthage/Build/iOS/SCLAlertViewFramework.framework; sourceTree = "<group>"; };
-		72FE03D0139A40A100E3B14D /* PriceUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUpdater.h; sourceTree = "<group>"; };
-		72FE03D1139A40A100E3B14D /* PriceUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUpdater.m; sourceTree = "<group>"; };
 		72FEE5DA157D42B4005E1C85 /* Children.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Children.h; sourceTree = "<group>"; };
 		72FEE5DB157D42B4005E1C85 /* Children.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Children.m; sourceTree = "<group>"; };
 		72FEE5DC157D42B4005E1C85 /* MTGRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGRules.h; sourceTree = "<group>"; };
@@ -597,7 +594,6 @@
 		7210BE3811F1E6AC0005914C /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				72E58AE11570E54100411068 /* Updating */,
 				725FC5A619D09E1D00EA65BD /* CardBrowserSearchHelper.h */,
 				725FC5A719D09E1D00EA65BD /* CardBrowserSearchHelper.m */,
 				72374B611438A19D00262021 /* Deck.h */,
@@ -989,15 +985,6 @@
 			path = UIColorSelectorTableViewCell;
 			sourceTree = "<group>";
 		};
-		72E58AE11570E54100411068 /* Updating */ = {
-			isa = PBXGroup;
-			children = (
-				72FE03D0139A40A100E3B14D /* PriceUpdater.h */,
-				72FE03D1139A40A100E3B14D /* PriceUpdater.m */,
-			);
-			path = Updating;
-			sourceTree = "<group>";
-		};
 		72E58AF0157110F900411068 /* DeckCardModifierCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,7 +1124,8 @@
 				ORGANIZATIONNAME = "Hankinsoft Development, Inc";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = LKJB72232C;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -1306,7 +1294,6 @@
 				729165FF20595F3200AB625F /* GGFullscreenImageViewController.m in Sources */,
 				725FC5AB19D0AB3300EA65BD /* HSSearchBarWithSpinner.m in Sources */,
 				725FC5A819D09E1D00EA65BD /* CardBrowserSearchHelper.m in Sources */,
-				72FE03D2139A40A100E3B14D /* PriceUpdater.m in Sources */,
 				72584F132232EE2B00E4B47C /* NSString+Hex.m in Sources */,
 				72B20AD92124645700FE1947 /* MTGLifeCounter.m in Sources */,
 				72A49EBB13B642A400C039BE /* NetworkActivityIndicatorHelper.m in Sources */,
@@ -1371,9 +1358,9 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LKJB72232C;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1432,9 +1419,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Hankinsoft Development Inc (LKJB72232C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LKJB72232C;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

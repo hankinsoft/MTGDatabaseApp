@@ -65,7 +65,7 @@ static NSComparisonResult compareStrings(NSString* _Nonnull obj1, NSString * _No
     }
 
     // Try to load from scryfall.com
-    NSString * imageString = [NSString stringWithFormat: @"https://api.scryfall.com/cards/multiverse/%ld?format=image&version=border_crop", multiverseId];
+    NSString * imageString = [NSString stringWithFormat: @"https://api.scryfall.com/cards/multiverse/%lu?format=image&version=border_crop", (unsigned long)multiverseId];
 
     NSURL * imageURL = [NSURL URLWithString: imageString];
 

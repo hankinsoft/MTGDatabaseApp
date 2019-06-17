@@ -1,6 +1,0 @@
-framework module MTStatusBarOverlay {
-  umbrella header "MTStatusBarOverlay-umbrella.h"
-
-  export *
-  module * { export * }
-}

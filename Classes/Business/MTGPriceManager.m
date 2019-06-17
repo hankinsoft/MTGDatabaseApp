@@ -11,9 +11,9 @@
 
 typedef struct __attribute__((packed)) {
     uint32_t    multiverseId;
-    uint16_t     lowPrice;
-    uint16_t     mediumPrice;
-    uint16_t     highPrice;
+    uint32_t     lowPrice;
+    uint32_t     mediumPrice;
+    uint32_t     highPrice;
 } MTGPriceEntry;
 
 @interface MTGPriceForCard()
@@ -31,41 +31,202 @@ typedef struct __attribute__((packed)) {
 @implementation MTGPriceManager
 
 static MTGPriceForCard * noPrice = nil;
+static HSSemaphore * updateSemaphore = nil;
 static HSSemaphore * loadingSemaphore = nil;
+static NSArray<MTGPriceForCard*>* prices = nil;
+static NSUInteger currentPriceTimestamp = 0;
+
++ (NSString*) pricesUpdatedNotificationName
+{
+    return @"com.hankinsoft.mtg.pricesUpdatedNotification";
+} // End of pricesUpdatedNotificationName
 
 + (void) initialize
 {
-    noPrice = [[MTGPriceForCard alloc] init];
-    noPrice.multiverseId = NSNotFound;
-    noPrice.lowPrice = [[NSDecimalNumber alloc] initWithInt: 0];
-    noPrice.mediumPrice = [[NSDecimalNumber alloc] initWithInt: 0];
-    noPrice.highPrice = [[NSDecimalNumber alloc] initWithInt: 0];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        noPrice = [[MTGPriceForCard alloc] init];
+        noPrice.multiverseId = NSNotFound;
+        noPrice.lowPrice = [[NSDecimalNumber alloc] initWithInt: 0];
+        noPrice.mediumPrice = [[NSDecimalNumber alloc] initWithInt: 0];
+        noPrice.highPrice = [[NSDecimalNumber alloc] initWithInt: 0];
 
-    loadingSemaphore = [[HSSemaphore alloc] initWithIdentifier: @"com.mtg.price.loadingSemaphore"
-                                                  initialValue: 1];
+        loadingSemaphore = [[HSSemaphore alloc] initWithIdentifier: @"com.mtg.price.loadingSemaphore"
+                                                      initialValue: 1];
+
+        updateSemaphore = [[HSSemaphore alloc] initWithIdentifier: @"com.mtg.price.updateSemaphore"
+                                                    initialValue: 1];
+    });
 }
+
++ (NSURL*) URLForPrices
+{
+    static NSURL * urlForPrices = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString * cacheDirectory = [paths objectAtIndex:0];
+        NSString * pricesPath = [cacheDirectory stringByAppendingPathComponent: @"prices.bin"];
+
+        urlForPrices = [NSURL fileURLWithPath: pricesPath];
+    });
+
+    return urlForPrices;
+} // End of URLForPrices
+
++ (void) beginUpdatePrices
+{
+    // Wait until we have a timestamp set
+    if(0 == currentPriceTimestamp)
+    {
+        return;
+    } // End of no timestamp set yet
+
+    NSDateComponents * dayComponent = [[NSDateComponents alloc] init];
+    dayComponent.day = 1;
+
+    NSDate * updateDate = [[NSCalendar currentCalendar] dateByAddingComponents: dayComponent
+                                                                        toDate: [NSDate dateWithTimeIntervalSince1970: currentPriceTimestamp]
+                                                                       options: 0];
+
+
+    if(NSDate.date.timeIntervalSince1970 < updateDate.timeIntervalSince1970)
+    {
+        NSLog(@"MTGPriceManager - not going to check for update yet.");
+        return;
+    } // End of do not need to update
+
+    // If we are already updating, then exit out.
+    if([updateSemaphore wait: DISPATCH_TIME_NOW])
+    {
+        return;
+    } // End of already updating
+
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // Get our latest price timestamp. (Timestamp file is smaller than prices file, so we grab it first).
+        NSUInteger latestPriceTimestamp = [self downloadLatestPriceTimestamp];
+
+        // Not found indicates a failure. We cannot try and update.
+        if(NSNotFound == latestPriceTimestamp)
+        {
+            [updateSemaphore signal];
+            return;
+        } // End of no price found
+
+        // If we alraedy have the latests, then we can safely exit.
+        if(latestPriceTimestamp <= currentPriceTimestamp)
+        {
+            [updateSemaphore signal];
+            return;
+        } // End of timestamp is invalid
+
+        NSData * priceData = [self downloadPrices];
+
+        if(nil == priceData)
+        {
+            NSLog(@"Failed to download price data");
+        }
+
+        // Wait for our loading semaphore to be complete
+        while([loadingSemaphore wait: DISPATCH_TIME_FOREVER]);
+
+        NSString * tempPath = NSTemporaryDirectory();
+        NSString * tempFile = [tempPath stringByAppendingPathComponent: NSUUID.UUID.UUIDString];
+        NSURL * tempURL = [NSURL fileURLWithPath: tempFile];
+        
+        if(![priceData writeToURL: tempURL
+                       atomically: YES])
+        {
+            NSLog(@"Failed to save price data to file");
+            [loadingSemaphore signal];
+            [updateSemaphore signal];
+            return;
+        } // End of failed to write to file
+
+        // Try and load
+        NSArray * tempPrices = [self loadPricesFromPath: tempFile
+                                              timestamp: &currentPriceTimestamp];
+
+        // Only replace if we have prices
+        if(tempPrices)
+        {
+            // Set our prices
+            prices = tempPrices;
+
+            // Replace our file
+            NSError * error = nil;
+            if([NSFileManager.defaultManager fileExistsAtPath: self.URLForPrices.path])
+            {
+                [NSFileManager.defaultManager replaceItemAtURL: self.URLForPrices
+                                                 withItemAtURL: tempURL
+                                                backupItemName: nil
+                                                       options: 0
+                                              resultingItemURL: nil
+                                                         error: &error];
+            }
+            else
+            {
+                [NSFileManager.defaultManager moveItemAtURL: tempURL
+                                                      toURL: self.URLForPrices
+                                                      error: &error];
+            }
+
+            if(error)
+            {
+                NSLog(@"Failed to copy new prices with error: %@", error.localizedDescription);
+            }
+        } // End of we had prices
+
+        [loadingSemaphore signal];
+        [updateSemaphore signal];
+
+        // Make sure anything that cares, knows that our notifications have been
+        // updated.
+        [NSNotificationCenter.defaultCenter postNotificationName: self.pricesUpdatedNotificationName
+                                                          object: nil];
+    });
+} // End of beginUpdatePrices
+
++ (nullable NSData*) downloadPrices
+{
+    NSString *url = [NSString stringWithFormat: @"https://github.com/hankinsoft/MTGDatabaseApp-Database/raw/master/MTGDatabase/Resources/prices.bin"];
+
+    NSLog( @"Want to get prices from %@", url );
+    
+    // We got data
+    NSData * data = [NSData dataWithContentsOfURL: [NSURL URLWithString: url]];
+
+    // Could be nil. Thats ok.
+    return data;
+} // End of downloadPrices
+
++ (NSUInteger) downloadLatestPriceTimestamp
+{
+    NSString *url = [NSString stringWithFormat: @"https://github.com/hankinsoft/MTGDatabaseApp-Database/raw/master/MTGDatabase/Resources/pricesTimestamp.bin"];
+
+    NSLog( @"Want to get prices from %@", url );
+
+    // We got data
+    NSData * data = [NSData dataWithContentsOfURL: [NSURL URLWithString: url]];
+    if(nil == data)
+    {
+        return NSNotFound;
+    } // End of could not find it
+
+    // Get our timestamp
+    NSUInteger latestPriceTimestamp;
+
+    [data getBytes: &latestPriceTimestamp
+            length: sizeof(latestPriceTimestamp)];
+
+    return latestPriceTimestamp;
+} // End of downloadPrices
 
 + (MTGPriceForCard*) priceForMultiverseId: (NSUInteger) multiverseId
 {
-    static NSArray<MTGPriceForCard*>* prices = nil;
-
     if(!prices)
     {
-        [loadingSemaphore wait: DISPATCH_TIME_FOREVER];
-
-        // Double check. Maybe we were waiting for the prices to finish loading.
-        if(!prices)
-        {
-            NSBundle * databaseBundle = [NSBundle bundleWithIdentifier: @"com.hankinsoft.MTGDatabase"];
-
-            NSString * pricesPath = [databaseBundle pathForResource: @"prices"
-                                                             ofType: @"bin"];
-
-            NSArray * tempPrices = [self loadPrices: pricesPath];
-            prices = tempPrices;
-        } // End of still no prices
-
-        [loadingSemaphore signal];
+        [self loadPrices];
     } // End of no prices
 
     MTGPriceForCard * searchObject = [[MTGPriceForCard alloc] init];
@@ -95,22 +256,62 @@ static HSSemaphore * loadingSemaphore = nil;
         return noPrice;
     } // End of not found
 
-    return prices[findIndex];
+    MTGPriceForCard * foundPrice = prices[findIndex];
+    return foundPrice;
 } // End of priceForMultiverseId:
 
-+ (CGFloat) randomPrice
++ (void) loadPrices
 {
-    int lowerBound = 0;
-    int upperBound = 30000;
-    
-    CGFloat rndValue = lowerBound + arc4random() % (upperBound - lowerBound);
-    
-    rndValue /= 10.0f;
+    BOOL wantToCheckPricesForUpdate = NO;
 
-    return rndValue;
-} // End of randomPriceDisplay
+    // Wait until we can load
+    while([loadingSemaphore wait: DISPATCH_TIME_FOREVER]);
 
-+ (NSArray<MTGPriceForCard*>*) loadPrices: (NSString*) pricesPath
+    // Double check. Maybe we were waiting for the prices to finish loading.
+    if(!prices)
+    {
+        // Use prices from resource if no file already exists
+        if(![NSFileManager.defaultManager fileExistsAtPath: self.URLForPrices.path])
+        {
+            NSBundle * databaseBundle = [NSBundle bundleWithIdentifier: @"com.hankinsoft.MTGDatabase"];
+
+            NSString * pricesPath = [databaseBundle pathForResource: @"prices"
+                                                             ofType: @"bin"];
+
+            NSError * error = nil;
+            [NSFileManager.defaultManager copyItemAtPath: pricesPath
+                                                  toPath: self.URLForPrices.path
+                                                   error: &error];
+
+            if(error)
+            {
+                NSLog(@"Failed to set prices path with error: %@", error.localizedDescription);
+            }
+
+            // We want to check for an update
+            wantToCheckPricesForUpdate = YES;
+        } // End of prices path does not exist
+
+        NSArray * tempPrices = [self loadPricesFromPath: self.URLForPrices.path
+                                              timestamp: &currentPriceTimestamp];
+
+        // Only replace if we have prices
+        if(tempPrices)
+        {
+            prices = tempPrices;
+        } // End of we had prices
+    } // End of still no prices
+
+    [loadingSemaphore signal];
+
+    if(wantToCheckPricesForUpdate)
+    {
+        [self beginUpdatePrices];
+    }
+} // End of loadPrices
+
++ (NSArray<MTGPriceForCard*>*) loadPricesFromPath: (NSString*) pricesPath
+                                        timestamp: (NSUInteger*) pTimestamp
 {
     NSMutableArray<MTGPriceForCard*>* prices = nil;
     void * pricesBuffer = NULL;
@@ -122,7 +323,7 @@ static HSSemaphore * loadingSemaphore = nil;
     MachTimer * binaryLoadTimer = [MachTimer startTimer];
 
     /* declare a file pointer */
-    FILE    *infile;
+    FILE    * infile;
 
     /* open an existing file for reading */
     infile = fopen(pricesPath.cString, "r");
@@ -156,21 +357,26 @@ static HSSemaphore * loadingSemaphore = nil;
     fread(pricesBuffer, sizeof(char), totalBytes, infile);
     fclose(infile);
 
-    totalEntries = (totalBytes - 10) / sizeof(MTGPriceEntry);
+#define kTimestampSize          8
+
+    totalEntries = (totalBytes - kTimestampSize) / sizeof(MTGPriceEntry);
     NSLog(@"Prices binary loading took %0.02f seconds", binaryLoadTimer.elapsedSeconds);
 
     prices = @[].mutableCopy;
 
-    NSDecimalNumber * tenDecimalNumber = [[NSDecimalNumber alloc] initWithInt: 10];
-    NSDecimalNumber * oneHundredDecimalNumbrer = [[NSDecimalNumber alloc] initWithInt: 100];
+    NSDecimalNumber * oneHundredDecimalNumbrer = [[NSDecimalNumber alloc] initWithInt: 1000];
 
-    NSString * dateString = [[NSString alloc] initWithBytes: pricesBuffer
-                                                     length: 10
-                                                   encoding: NSUTF8StringEncoding];
+    NSUInteger timestamp = *((NSUInteger *)pricesBuffer);
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970: timestamp];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterMediumStyle;
+    formatter.timeStyle = NSDateFormatterMediumStyle;
 
+
+    NSString * dateString = [formatter stringFromDate: date];
     (void) dateString; // Just voided so we get no 'Unused variable' warning. I want it here so I can see the value during debugging.
 
-    MTGPriceEntry * priceEntry = pricesBuffer + 10;
+    MTGPriceEntry * priceEntry = pricesBuffer + kTimestampSize;
     for(NSInteger index = 0; index < totalEntries; ++index)
     {
         MTGPriceForCard * priceForCard = [[MTGPriceForCard alloc] init];
@@ -181,34 +387,24 @@ static HSSemaphore * loadingSemaphore = nil;
         priceForCard.mediumPrice  = [[NSDecimalNumber alloc] initWithInt: priceEntry->mediumPrice];
         priceForCard.highPrice    = [[NSDecimalNumber alloc] initWithInt: priceEntry->highPrice];
 
-        priceForCard.lowPrice = [priceForCard.lowPrice decimalNumberByDividingBy: tenDecimalNumber];
-        priceForCard.mediumPrice = [priceForCard.mediumPrice decimalNumberByDividingBy: tenDecimalNumber];
-        priceForCard.highPrice = [priceForCard.highPrice decimalNumberByDividingBy: tenDecimalNumber];
-
-        NSUInteger multiverseId = priceEntry->multiverseId;
-        if(multiverseId & (1 << 31))
-        {
-            multiverseId &= ~(1 << 31);
-            priceForCard.highPrice = [priceForCard.highPrice decimalNumberByMultiplyingBy: oneHundredDecimalNumbrer];
-        }
-        if(multiverseId & (1 << 30))
-        {
-            multiverseId &= ~(1 << 30);
-            priceForCard.mediumPrice = [priceForCard.mediumPrice decimalNumberByMultiplyingBy: oneHundredDecimalNumbrer];
-        }
-        if(multiverseId & (1 << 29))
-        {
-            multiverseId &= ~(1 << 29);
-            priceForCard.lowPrice = [priceForCard.lowPrice decimalNumberByMultiplyingBy: oneHundredDecimalNumbrer];
-        }
+        priceForCard.lowPrice = [priceForCard.lowPrice decimalNumberByDividingBy: oneHundredDecimalNumbrer];
+        priceForCard.mediumPrice = [priceForCard.mediumPrice decimalNumberByDividingBy: oneHundredDecimalNumbrer];
+        priceForCard.highPrice = [priceForCard.highPrice decimalNumberByDividingBy: oneHundredDecimalNumbrer];
 
         // Set our multiverseId
+        NSUInteger multiverseId = priceEntry->multiverseId;
         priceForCard.multiverseId = multiverseId;
 
         [prices addObject: priceForCard];
 
         ++priceEntry;
     }
+
+    // If we have prices and a prices count
+    if(prices && prices.count && pTimestamp)
+    {
+        *pTimestamp = timestamp;
+    } // End of we have a timestamp pointer specified
 
     return prices;
 }

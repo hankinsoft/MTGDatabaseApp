@@ -9,7 +9,6 @@ target "MTG Deck Builder" do
   pod 'CocoaLumberjack'
 
   pod 'MBProgressHUD'
-  pod 'MTStatusBarOverlay'
 
   pod 'AppCenter'
 end

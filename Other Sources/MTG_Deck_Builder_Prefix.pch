@@ -29,7 +29,6 @@
     #import "SQLProAppearanceManager.h"
     #import "MTGNavigationController.h"
 
-    #import "MTStatusBarOverlay.h"
     #import "MachTimer.h"
     #import "HSLogHelper.h"
     #import "HSSemaphore.h"
