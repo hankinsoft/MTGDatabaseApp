@@ -9,6 +9,8 @@
 #import "MTGPriceManager.h"
 #import "HSSemaphore.h"
 
+@import SSSnackbar;
+
 typedef struct __attribute__((packed)) {
     uint32_t    multiverseId;
     uint32_t     lowPrice;
@@ -89,7 +91,6 @@ static NSUInteger currentPriceTimestamp = 0;
                                                                         toDate: [NSDate dateWithTimeIntervalSince1970: currentPriceTimestamp]
                                                                        options: 0];
 
-
     if(NSDate.date.timeIntervalSince1970 < updateDate.timeIntervalSince1970)
     {
         NSLog(@"MTGPriceManager - not going to check for update yet.");
@@ -102,7 +103,21 @@ static NSUInteger currentPriceTimestamp = 0;
         return;
     } // End of already updating
 
+    __block SSSnackbar * snackbar = nil;
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            snackbar = [SSSnackbar snackbarWithMessage: @"Updating prices"
+                                            actionText: nil
+                                              duration: 0
+                                           actionBlock:^(SSSnackbar *sender) {
+                                               
+                                           } dismissalBlock:^(SSSnackbar *sender) {
+                                               
+                                           }];
+            [snackbar show];
+        });
+
         // Get our latest price timestamp. (Timestamp file is smaller than prices file, so we grab it first).
         NSUInteger latestPriceTimestamp = [self downloadLatestPriceTimestamp];
 
@@ -110,6 +125,11 @@ static NSUInteger currentPriceTimestamp = 0;
         if(NSNotFound == latestPriceTimestamp)
         {
             [updateSemaphore signal];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // No need to update. Just close
+                [snackbar dismiss];
+            });
+
             return;
         } // End of no price found
 
@@ -117,6 +137,12 @@ static NSUInteger currentPriceTimestamp = 0;
         if(latestPriceTimestamp <= currentPriceTimestamp)
         {
             [updateSemaphore signal];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // No need to update, just close
+                [snackbar dismiss];
+            });
+
             return;
         } // End of timestamp is invalid
 
@@ -125,7 +151,15 @@ static NSUInteger currentPriceTimestamp = 0;
         if(nil == priceData)
         {
             NSLog(@"Failed to download price data");
-        }
+            [updateSemaphore signal];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // No need to update, just close
+                [snackbar dismiss];
+            });
+
+            return;
+        } // End of no price data
 
         // Wait for our loading semaphore to be complete
         while([loadingSemaphore wait: DISPATCH_TIME_FOREVER]);
@@ -140,6 +174,11 @@ static NSUInteger currentPriceTimestamp = 0;
             NSLog(@"Failed to save price data to file");
             [loadingSemaphore signal];
             [updateSemaphore signal];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [snackbar dismiss];
+            });
+
             return;
         } // End of failed to write to file
 
@@ -180,10 +219,14 @@ static NSUInteger currentPriceTimestamp = 0;
         [loadingSemaphore signal];
         [updateSemaphore signal];
 
-        // Make sure anything that cares, knows that our notifications have been
-        // updated.
-        [NSNotificationCenter.defaultCenter postNotificationName: self.pricesUpdatedNotificationName
-                                                          object: nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [snackbar dismiss];
+
+            // Make sure anything that cares, knows that our notifications have been
+            // updated.
+            [NSNotificationCenter.defaultCenter postNotificationName: self.pricesUpdatedNotificationName
+                                                              object: nil];
+        });
     });
 } // End of beginUpdatePrices
 
@@ -262,8 +305,6 @@ static NSUInteger currentPriceTimestamp = 0;
 
 + (void) loadPrices
 {
-    BOOL wantToCheckPricesForUpdate = NO;
-
     // Wait until we can load
     while([loadingSemaphore wait: DISPATCH_TIME_FOREVER]);
 
@@ -287,9 +328,6 @@ static NSUInteger currentPriceTimestamp = 0;
             {
                 NSLog(@"Failed to set prices path with error: %@", error.localizedDescription);
             }
-
-            // We want to check for an update
-            wantToCheckPricesForUpdate = YES;
         } // End of prices path does not exist
 
         NSArray * tempPrices = [self loadPricesFromPath: self.URLForPrices.path
@@ -304,10 +342,8 @@ static NSUInteger currentPriceTimestamp = 0;
 
     [loadingSemaphore signal];
 
-    if(wantToCheckPricesForUpdate)
-    {
-        [self beginUpdatePrices];
-    }
+    // Check for an update (this will do nothing if our prices is < 24 hours old).
+    [self beginUpdatePrices];
 } // End of loadPrices
 
 + (NSArray<MTGPriceForCard*>*) loadPricesFromPath: (NSString*) pricesPath

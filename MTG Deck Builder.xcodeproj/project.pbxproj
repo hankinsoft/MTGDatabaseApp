@@ -1210,6 +1210,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/XLForm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MTGDatabase.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SSSnackbar.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (

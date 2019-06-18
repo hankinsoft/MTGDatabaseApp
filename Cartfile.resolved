@@ -1,6 +1,7 @@
 github "Hankinsoft-Development/XLForm" "51e795348d993f92346e0d880c8d9a6e4a45d9ac"
 github "ccgus/fmdb" "77d1c26ca462f84c8edf608876dba87c1f352208"
-github "hankinsoft/MTGDatabaseApp-Database" "4cd6df53eb6577926e61acb0d1fec9f0b06a353f"
+github "hankinsoft/MTGDatabaseApp-Database" "9131eff8196f6c015661622f7994c7c3b6b3515a"
 github "hankinsoft/RMStore" "42d3ba3f3947b0ae867916292b961418d0a642d9"
 github "hankinsoft/SCLAlertView" "0a663571c56d9199dcde7b59262744ef4d7a76b6"
+github "hankinsoft/SSSnackbar" "0f7b2abacb67d0ffe219b55d284112eb205e5d97"
 github "rs/SDWebImage" "5.0.6"
