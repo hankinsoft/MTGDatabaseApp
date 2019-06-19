@@ -29,6 +29,7 @@
 
 #import "SQLProAppearanceManager.h"
 #import "MTGCardImageHelper.h"
+#import "MTGPriceManager.h"
 
 #define kTableViewReuseIdentifier            @"kMTGTableViewCell"
 #define kCollectionViewReuseIdentifier       @"kMTGCollectionViewCell"
@@ -226,12 +227,25 @@
     loading = NO;
     
     [self addObservers];
+    [NSNotificationCenter.defaultCenter addObserver: self
+                                           selector: @selector(onPricesUpdated)
+                                               name: MTGPriceManager.pricesUpdatedNotificationName
+                                             object: nil];
 }
 
 - (void) dealloc
 {
+    [NSNotificationCenter.defaultCenter removeObserver: self
+                                                  name: MTGPriceManager.pricesUpdatedNotificationName
+                                                object: nil];
+
     [self removeObservers];
 } // End of dealloc
+
+- (void) onPricesUpdated
+{
+    [self startLoadingResults];
+} // End of onPricesUpdated
 
 - (void) viewDidLayoutSubviews
 {
@@ -263,11 +277,10 @@
     [self modeToggled: nil];
 
     // Setup our right bar button item
-    settingsButton =
-        [[UIBarButtonItem alloc] initWithImage: [UIImage imageNamed: @"Settings"]
-                                         style: UIBarButtonItemStylePlain
-                                        target: self
-                                        action: @selector(onSettings:)];
+    settingsButton = [[UIBarButtonItem alloc] initWithImage: [UIImage imageNamed: @"Settings"]
+                                                      style: UIBarButtonItemStylePlain
+                                                     target: self
+                                                     action: @selector(onSettings:)];
 
     self.navigationItem.rightBarButtonItems = @[settingsButton, segmentedBarButtonItem];
 }

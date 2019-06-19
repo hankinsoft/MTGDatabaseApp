@@ -46,7 +46,8 @@
 	return self;
 }
 
-- (void)revealSidebar {
+- (void) revealSidebar
+{
 	_revealBlock();
 }
 
