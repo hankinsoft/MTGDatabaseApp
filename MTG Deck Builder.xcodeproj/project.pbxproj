@@ -73,7 +73,6 @@
 		725AAEBC1205E9CE00E5DFC1 /* UISetTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725AAEBB1205E9CE00E5DFC1 /* UISetTableCell.m */; };
 		725AC39519CCB372009A8F5D /* GHPushedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 725AC39419CCB372009A8F5D /* GHPushedViewController.m */; };
 		725DAE9021343F2800152C33 /* MTGCardImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 725DAE8F21343F2800152C33 /* MTGCardImageHelper.m */; };
-		725DAE922134433C00152C33 /* CardImages in Resources */ = {isa = PBXBuildFile; fileRef = 725DAE912134433C00152C33 /* CardImages */; };
 		725FC59819D0521100EA65BD /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC59619D0521100EA65BD /* CardCollectionViewCell.m */; };
 		725FC59919D0521100EA65BD /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725FC59719D0521100EA65BD /* CardCollectionViewCell.xib */; };
 		725FC59D19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC59C19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m */; };
@@ -271,7 +270,6 @@
 		725AD56A19CE0EE7009A8F5D /* libchilkatIos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchilkatIos.a; path = "chilkat-9.5.0-ios/lib/libchilkatIos.a"; sourceTree = "<group>"; };
 		725DAE8E21343F2800152C33 /* MTGCardImageHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGCardImageHelper.h; sourceTree = "<group>"; };
 		725DAE8F21343F2800152C33 /* MTGCardImageHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGCardImageHelper.m; sourceTree = "<group>"; };
-		725DAE912134433C00152C33 /* CardImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CardImages; sourceTree = "<group>"; };
 		725FC59519D0521100EA65BD /* CardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCollectionViewCell.h; sourceTree = "<group>"; };
 		725FC59619D0521100EA65BD /* CardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCollectionViewCell.m; sourceTree = "<group>"; };
 		725FC59719D0521100EA65BD /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				72EFC4D41245110400C93429 /* html */,
-				725DAE912134433C00152C33 /* CardImages */,
 				72E0D1382088D4C2004119BC /* CardSets */,
 				722CAE0B181EA01C003E2BCA /* Images.xcassets */,
 				72FEE5E1157D42FC005E1C85 /* MTGRules.json */,
@@ -1171,7 +1168,6 @@
 				7234AA5913009D500029EA1A /* MainWindow.xib in Resources */,
 				724A5B001300C32C00EC01F1 /* BrowseSetViewController.xib in Resources */,
 				724A5B2D1300C4B100EC01F1 /* MTGSmartSearchViewController.xib in Resources */,
-				725DAE922134433C00152C33 /* CardImages in Resources */,
 				72A0400713034D5E00B7F046 /* MTGEditSmartSearchViewController.xib in Resources */,
 				72A040961303559300B7F046 /* MTGSettingsViewController.xib in Resources */,
 				72F1D8CA2123106800A1C475 /* MTGLifeCounterViewController.xib in Resources */,
