@@ -264,8 +264,7 @@
 	BOOL gridVisible = false;
 
     // Set our toggle
-    NSUInteger index =
-        ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey: @"toggleMode"]).intValue;
+    NSUInteger index = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey: @"toggleMode"]).intValue;
 
     [listStyleSegmentedControl setSelectedSegmentIndex: index];
 
@@ -526,6 +525,13 @@
                   targetImageView: collectionViewCell.cardImageView
                  placeholderImage: backOfCardImage
                      didLoadBlock:^(UIImage *image, BOOL wasCached) {
+                         // Sometimes if we are scrolling quickly, we may queue up a few image loads. This
+                         // check makes sure that the image being loaded is for the proper card.
+                         if(![collectionViewCell.cardNameLabel.text isEqualToString: card.name])
+                         {
+                             return;
+                         } // End of card has already changed
+
                          [weakCollectionViewCell stopAnimating: NO];
 
                          if(!wasCached)

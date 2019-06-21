@@ -427,6 +427,7 @@
       
       @"{U/B}":@"cost_" SIZE "_blue-black",
       @"{B/R}":@"cost_" SIZE "_black-red",
+      @"{B/G}":@"cost_" SIZE "_black-green",
       @"{W/U}":@"cost_" SIZE "_white-blue",
       @"{W/B}":@"cost_" SIZE "_white-black",
       @"{G/W}":@"cost_" SIZE "_green-white",
@@ -528,10 +529,11 @@
 
       @"{(U/B)}":@"cost_" SIZE_RULES "_blue-black",
       @"{(B/R)}":@"cost_" SIZE_RULES "_black-red",
+      @"{{B/G}}":@"cost_" SIZE_RULES "_black-green",
       @"{(W/U)}":@"cost_" SIZE_RULES "_white-blue",
       @"{(W/B)}":@"cost_" SIZE_RULES "_white-black",
       @"{{G/W}}":@"cost_" SIZE_RULES "_green-white",
-      @"{{G/U}}":@"cost_" SIZE_RULES "_green-blue"
+      @"{{G/U}}":@"cost_" SIZE_RULES "_green-blue",
       };
 
     for(NSString * key in replaceDictonary.allKeys)

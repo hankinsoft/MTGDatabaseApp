@@ -105,28 +105,37 @@
     
     [self.rulesLabel setAttributedText: [card rulesAttributedString]];
 
-    __weak UIImageView * targetImageView = self.cardImageView;
+    weakify(self);
     [MTGCardImageHelper loadImage: card.multiverseId
-                  targetImageView: targetImageView
+                  targetImageView: self.cardImageView
                  placeholderImage: backOfCardImage
                      didLoadBlock:^(UIImage *image, BOOL wasCached) {
+                         strongify(self);
+
+                         // Sometimes if we are scrolling quickly, we may queue up a few image loads. This
+                         // check makes sure that the image being loaded is for the proper card.
+                         if(![self.cardNameLabel.text isEqualToString: card.name])
+                         {
+                             return;
+                         } // End of card has already changed
+
                          if(!wasCached)
                          {
-                             [UIView transitionWithView: targetImageView
+                             [UIView transitionWithView: self.cardImageView
                                                duration: 1.0f
                                                 options: UIViewAnimationOptionTransitionFlipFromLeft
-                                             animations:^{[targetImageView setImage: image];}
+                                             animations:^{[self.cardImageView setImage: image];}
                                              completion: NULL];
                          }
                          else
                          {
-                             [targetImageView setImage: image];
+                             [self.cardImageView setImage: image];
                          }
                      } didFailBlock:^{
-                         [UIView transitionWithView: targetImageView
+                         [UIView transitionWithView: self.cardImageView
                                            duration: 1.0f
                                             options: UIViewAnimationOptionTransitionFlipFromLeft
-                                         animations:^{[targetImageView setImage: noImageForCard];}
+                                         animations:^{[self.cardImageView setImage: noImageForCard];}
                                          completion: NULL];
                      }];
 
