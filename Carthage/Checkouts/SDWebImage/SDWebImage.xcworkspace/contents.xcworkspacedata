@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SDWebImage.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Examples/SDWebImage Demo.xcodeproj">
    </FileRef>
    <FileRef
@@ -26,9 +23,6 @@
       location = "group:Docs">
    </FileRef>
    <FileRef
-      location = "group:Tests/Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Examples/Pods/Pods.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

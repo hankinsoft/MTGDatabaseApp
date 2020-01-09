@@ -17,6 +17,12 @@ const NSTimeInterval kGHRevealSidebarDefaultAnimationDuration = 0.25;
 const CGFloat kGHRevealSidebarWidth = 260.0f;
 const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 
+// Just define so we can see if it exists when we add to a view
+@interface MTGHideShowRevealGestureRecognizer : UISwipeGestureRecognizer
+@end
+
+@implementation MTGHideShowRevealGestureRecognizer
+@end
 
 #pragma mark -
 #pragma mark Private Interface
@@ -86,6 +92,36 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 
 - (void) setContentViewController: (UIViewController *) cvc
 {
+    if(cvc && cvc.view)
+    {
+        BOOL hasSwipeGestures = NO;
+        for(UIGestureRecognizer * recognizer in cvc.view.gestureRecognizers)
+        {
+            if(![recognizer isKindOfClass: MTGHideShowRevealGestureRecognizer.class])
+            {
+                continue;
+            }
+
+            hasSwipeGestures = true;
+            break;
+        }
+
+        if(!hasSwipeGestures)
+        {
+            UISwipeGestureRecognizer * swipeLeftGesture = [[MTGHideShowRevealGestureRecognizer alloc] initWithTarget: self
+                                                                                                              action: @selector(onSwipeLeftGesture:)];
+
+            swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+            [self.view addGestureRecognizer: swipeLeftGesture];
+
+            UISwipeGestureRecognizer * swipeRightGesture = [[MTGHideShowRevealGestureRecognizer alloc] initWithTarget: self
+                                                                                                               action: @selector(onSwipeRightGesture:)];
+
+            swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
+            [self.view addGestureRecognizer: swipeRightGesture];
+        }
+    }
+
     if (_contentViewController == nil)
     {
         cvc.view.frame = _contentView.bounds;
@@ -122,6 +158,21 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
     }
 }
 
+- (void) onSwipeLeftGesture: (UISwipeGestureRecognizer*) gesture
+{
+    [self hideSidebar];
+} // End of onSwipeLeftGesture:
+
+- (void) onSwipeRightGesture: (UISwipeGestureRecognizer*) gesture
+{
+    if(!self.sidebarShowing)
+    {
+        // Show our sidebar
+        [self toggleSidebar: YES
+                   duration: kGHRevealSidebarDefaultAnimationDuration];
+    } // End of onSwipeRightGesture
+}
+
 #pragma mark Memory Management
 
 - (id)initWithNibName: (NSString *) nibNameOrNil
@@ -133,9 +184,8 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
         self.sidebarShowing = NO;
         self.searching = NO;
 
-        _tapRecog =
-            [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                    action: @selector(hideSidebar)];
+        _tapRecog = [[UITapGestureRecognizer alloc] initWithTarget: self
+                                                            action: @selector(hideSidebar)];
 
         _tapRecog.cancelsTouchesInView = YES;
 

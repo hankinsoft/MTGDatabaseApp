@@ -6,12 +6,9 @@
 //
 
 #import "GHRootViewController.h"
-#import "GHPushedViewController.h"
-
 
 #pragma mark Private Interface
 @interface GHRootViewController ()
-- (void)pushViewController;
 - (void)revealSidebar;
 @end
 
@@ -47,25 +44,16 @@
 }
 
 #pragma mark UIViewController
-- (void)viewDidLoad {
+- (void) viewDidLoad
+{
     [super viewDidLoad];
     self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.view.backgroundColor = [UIColor lightGrayColor];
-    UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [pushButton setTitle:@"Push" forState:UIControlStateNormal];
-    [pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
-    [pushButton sizeToFit];
-    [self.view addSubview:pushButton];
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+    {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-}
-
-#pragma mark Private Methods
-- (void)pushViewController {
-    NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
-    UIViewController *vc = [[GHPushedViewController alloc] initWithTitle:vcTitle];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)revealSidebar {

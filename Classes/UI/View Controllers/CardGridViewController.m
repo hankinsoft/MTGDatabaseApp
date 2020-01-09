@@ -593,8 +593,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath
     CardDetailsViewController * cardViewController = [[CardDetailsViewController alloc] init];
     cardViewController.card = selectedCard;
 
-    MTGNavigationController * navController =
-        [[MTGNavigationController alloc] initWithRootViewController: cardViewController];
+    MTGNavigationController * navController = [[MTGNavigationController alloc] initWithRootViewController: cardViewController];
 
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     navController.modalTransitionStyle   = UIModalTransitionStyleCoverVertical;

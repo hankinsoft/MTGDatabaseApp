@@ -167,11 +167,11 @@ viewForHeaderInSection:(NSInteger)section
     return headerView;
 }
 
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-       (void) tableView: (UITableView *) tableView
+ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
     id selectedItem = _controllers[indexPath.section][indexPath.row];
-    
+
     if([selectedItem isKindOfClass: [NSURL class]])
     {
         [[UIApplication sharedApplication] openURL: selectedItem];
@@ -179,7 +179,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     else
     {
         _sidebarVC.contentViewController = selectedItem;
-        [_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
+        [_sidebarVC toggleSidebar: NO
+                         duration: kGHRevealSidebarDefaultAnimationDuration];
     }
 }
 

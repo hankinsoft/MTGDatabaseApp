@@ -179,7 +179,7 @@ didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
     AppDelegate * appDelegate = self;
     revealBlock = ^(){
         [appDelegate.revealController toggleSidebar: !appDelegate.revealController.sidebarShowing
-                                           duration:kGHRevealSidebarDefaultAnimationDuration];
+                                           duration: kGHRevealSidebarDefaultAnimationDuration];
     };
 
     NSMutableArray *headers = @[

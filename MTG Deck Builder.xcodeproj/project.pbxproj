@@ -71,7 +71,6 @@
 		72584F192232EEA400E4B47C /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 72584F182232EEA400E4B47C /* libxml2.tbd */; };
 		72584F1C2232EEFF00E4B47C /* NSMutableArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 72584F1B2232EEFF00E4B47C /* NSMutableArray+Reverse.m */; };
 		725AAEBC1205E9CE00E5DFC1 /* UISetTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725AAEBB1205E9CE00E5DFC1 /* UISetTableCell.m */; };
-		725AC39519CCB372009A8F5D /* GHPushedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 725AC39419CCB372009A8F5D /* GHPushedViewController.m */; };
 		725DAE9021343F2800152C33 /* MTGCardImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 725DAE8F21343F2800152C33 /* MTGCardImageHelper.m */; };
 		725FC59819D0521100EA65BD /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC59619D0521100EA65BD /* CardCollectionViewCell.m */; };
 		725FC59919D0521100EA65BD /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725FC59719D0521100EA65BD /* CardCollectionViewCell.xib */; };
@@ -265,8 +264,6 @@
 		72584F1B2232EEFF00E4B47C /* NSMutableArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Reverse.m"; sourceTree = "<group>"; };
 		725AAEBA1205E9CE00E5DFC1 /* UISetTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISetTableCell.h; sourceTree = "<group>"; };
 		725AAEBB1205E9CE00E5DFC1 /* UISetTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISetTableCell.m; sourceTree = "<group>"; };
-		725AC39319CCB372009A8F5D /* GHPushedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushedViewController.h; sourceTree = "<group>"; };
-		725AC39419CCB372009A8F5D /* GHPushedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushedViewController.m; sourceTree = "<group>"; };
 		725AD56A19CE0EE7009A8F5D /* libchilkatIos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchilkatIos.a; path = "chilkat-9.5.0-ios/lib/libchilkatIos.a"; sourceTree = "<group>"; };
 		725DAE8E21343F2800152C33 /* MTGCardImageHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTGCardImageHelper.h; sourceTree = "<group>"; };
 		725DAE8F21343F2800152C33 /* MTGCardImageHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTGCardImageHelper.m; sourceTree = "<group>"; };
@@ -872,8 +869,6 @@
 				727435BF1738015A009A9A30 /* GHMenuCell.m */,
 				727435C1173801D7009A9A30 /* GHMenuViewController.h */,
 				727435C2173801D7009A9A30 /* GHMenuViewController.m */,
-				725AC39319CCB372009A8F5D /* GHPushedViewController.h */,
-				725AC39419CCB372009A8F5D /* GHPushedViewController.m */,
 				727435AC1738000D009A9A30 /* GHRevealViewController.h */,
 				727435AD1738000D009A9A30 /* GHRevealViewController.m */,
 				727435C4173803D8009A9A30 /* GHRootViewController.h */,
@@ -1121,7 +1116,8 @@
 				ORGANIZATIONNAME = "Hankinsoft Development, Inc";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = LKJB72232C;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -1327,7 +1323,6 @@
 				727435C6173803D8009A9A30 /* GHRootViewController.m in Sources */,
 				7246633E2062C5A100C92672 /* MTGLargeGridFlowLayout.m in Sources */,
 				727375F5173BDEEA00139383 /* SearchBarWithSpinner.m in Sources */,
-				725AC39519CCB372009A8F5D /* GHPushedViewController.m in Sources */,
 				72D5237F1756A191000E7D83 /* BrowseFormatViewController.m in Sources */,
 				72469547207D391C00645FB3 /* MTGCardDetailsTableViewCell.m in Sources */,
 				720064CA1757D4CD00D987B0 /* UILoadingView.m in Sources */,
@@ -1352,11 +1347,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 3062;
+				DEVELOPMENT_TEAM = LKJB72232C;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1385,6 +1381,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes\"",
 				);
+				MARKETING_VERSION = 2020.01;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1412,12 +1409,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Hankinsoft Development Inc (LKJB72232C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 3062;
+				DEVELOPMENT_TEAM = LKJB72232C;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1440,6 +1438,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes\"",
 				);
+				MARKETING_VERSION = 2020.01;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",

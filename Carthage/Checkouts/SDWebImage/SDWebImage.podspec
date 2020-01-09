@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SDWebImage'
-  s.version = '5.0.6'
+  s.version = '5.4.2'
 
   s.osx.deployment_target = '10.10'
   s.ios.deployment_target = '8.0'
@@ -23,12 +23,16 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.framework = 'ImageIO'
-  s.module_map = 'WebImage/SDWebImage.modulemap'
   
   s.default_subspec = 'Core'
 
+  s.pod_target_xcconfig = {
+    'SUPPORTS_MACCATALYST' => 'YES',
+    'DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER' => 'NO'
+  }
+
   s.subspec 'Core' do |core|
-    core.source_files = 'SDWebImage/*.{h,m}', 'WebImage/SDWebImage.h', 'SDWebImage/Private/*.{h,m}'
+    core.source_files = 'SDWebImage/Core/*.{h,m}', 'WebImage/SDWebImage.h', 'SDWebImage/Private/*.{h,m}'
     core.exclude_files = 'SDWebImage/MapKit/*.{h,m}'
     core.private_header_files = 'SDWebImage/Private/*.h'
   end
