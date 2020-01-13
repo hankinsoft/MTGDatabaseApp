@@ -75,7 +75,6 @@
 		725FC59819D0521100EA65BD /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC59619D0521100EA65BD /* CardCollectionViewCell.m */; };
 		725FC59919D0521100EA65BD /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725FC59719D0521100EA65BD /* CardCollectionViewCell.xib */; };
 		725FC59D19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC59C19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m */; };
-		725FC5A519D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC5A419D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.m */; };
 		725FC5A819D09E1D00EA65BD /* CardBrowserSearchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC5A719D09E1D00EA65BD /* CardBrowserSearchHelper.m */; };
 		725FC5AB19D0AB3300EA65BD /* HSSearchBarWithSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC5AA19D0AB3300EA65BD /* HSSearchBarWithSpinner.m */; };
 		725FC5AE19D0AEF200EA65BD /* ShakeToRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 725FC5AD19D0AEF200EA65BD /* ShakeToRootViewController.m */; };
@@ -272,8 +271,6 @@
 		725FC59719D0521100EA65BD /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
 		725FC59B19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalPagedCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		725FC59C19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalPagedCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		725FC5A319D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoHideNavigationBarSearchDisplayController.h; sourceTree = "<group>"; };
-		725FC5A419D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoHideNavigationBarSearchDisplayController.m; sourceTree = "<group>"; };
 		725FC5A619D09E1D00EA65BD /* CardBrowserSearchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardBrowserSearchHelper.h; sourceTree = "<group>"; };
 		725FC5A719D09E1D00EA65BD /* CardBrowserSearchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardBrowserSearchHelper.m; sourceTree = "<group>"; };
 		725FC5A919D0AB3300EA65BD /* HSSearchBarWithSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSearchBarWithSpinner.h; sourceTree = "<group>"; };
@@ -823,8 +820,6 @@
 				725FC5AA19D0AB3300EA65BD /* HSSearchBarWithSpinner.m */,
 				725FC59B19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.h */,
 				725FC59C19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m */,
-				725FC5A319D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.h */,
-				725FC5A419D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.m */,
 				725FC5AC19D0AEF200EA65BD /* ShakeToRootViewController.h */,
 				725FC5AD19D0AEF200EA65BD /* ShakeToRootViewController.m */,
 			);
@@ -1096,6 +1091,7 @@
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				72125993205801490062FFF9 /* Carthage copy frameworks */,
+				721F920E23CB5E38000045C6 /* Upload Symbols (Appcenter.ms) */,
 			);
 			buildRules = (
 			);
@@ -1116,7 +1112,6 @@
 				ORGANIZATIONNAME = "Hankinsoft Development, Inc";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = LKJB72232C;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1211,6 +1206,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		721F920E23CB5E38000045C6 /* Upload Symbols (Appcenter.ms) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Symbols (Appcenter.ms)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n\nfind \"${BUILT_PRODUCTS_DIR}\" -name \"*.dSYM\" -print -exec appcenter crashes upload-symbols --app \"kyle-015/MTG-Deck-builder\" --token 50bd7f1447085aa37e380d0558c9fd7624003a55 -s \"{}\" \\;\n\nfi\n\n";
+		};
 		C9C6B6ADD32C69A18C2DB4D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1255,7 +1268,6 @@
 				7291618A11D0208100B99F7B /* CardDetailsViewController.m in Sources */,
 				72584F172232EE7500E4B47C /* GDataXMLNode.m in Sources */,
 				721235DE2126E70100300852 /* MTGLifeCounterEDHCollectionViewCell.m in Sources */,
-				725FC5A519D0980000EA65BD /* NoHideNavigationBarSearchDisplayController.m in Sources */,
 				725AAEBC1205E9CE00E5DFC1 /* UISetTableCell.m in Sources */,
 				729165F120584E8D00AB625F /* SQLProTableView.m in Sources */,
 				725FC59D19D06E6800EA65BD /* HorizontalPagedCollectionViewFlowLayout.m in Sources */,
@@ -1351,8 +1363,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3062;
-				DEVELOPMENT_TEAM = LKJB72232C;
+				CURRENT_PROJECT_VERSION = 3064;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1381,7 +1393,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes\"",
 				);
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.03;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1414,8 +1426,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 3062;
-				DEVELOPMENT_TEAM = LKJB72232C;
+				CURRENT_PROJECT_VERSION = 3064;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1438,7 +1450,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes\"",
 				);
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.03;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",

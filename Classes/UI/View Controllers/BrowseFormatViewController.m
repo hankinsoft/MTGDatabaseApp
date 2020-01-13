@@ -84,7 +84,7 @@
         [[AppDelegate databaseQueue] inDatabase: ^(FMDatabase * database) {
             strongify(self);
 
-            NSString * query = @"SELECT formatId, name, cardCount FROM format ORDER BY name ASC";
+            NSString * query = @"SELECT formatId, name, cardCount FROM format ORDER BY name COLLATE NOCASE ASC";
             FMResultSet * results = [database executeQuery: query];
 
             if(nil == results && nil != database.lastError)
@@ -117,7 +117,7 @@
             //---get the first char of each state---
             char alphabet = [format characterAtIndex: 0];
 
-            NSString *uniChar = [NSString stringWithFormat:@"%c", (char)alphabet];
+            NSString *uniChar = [[NSString stringWithFormat:@"%c", (char)alphabet] uppercaseString];
 
             //---add each letter to the index array---
             if (![indexes containsObject: uniChar])
@@ -148,37 +148,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView
 {
-/*
-	// If we are searching, then no titles
-	if (aTableView == self.searchDisplayController.searchResultsTableView)
-	{
-		return [searchResultCells count] > 0 ? 1 : 0;
-	} // End of we are searching
-*/
     // Return the number of sections.
-    return [setIndex count];;
+    return [setIndex count];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)aTableView
 {
-	// If we are searching, then no titles
-	if (aTableView == self.searchDisplayController.searchResultsTableView)
-	{
-		return nil;
-	} // End of we are searching
-
     return setIndex;
 } // End of sectionIndexTitlesForTableView
 
 - (NSString *) tableView: (UITableView *) aTableView
  titleForHeaderInSection: (NSInteger) section
 {
-	// If we are searching, then no titles
-	if (aTableView == self.searchDisplayController.searchResultsTableView)
-	{
-		return nil;
-	}
-	
 	// Return our section name
     return [setIndex objectAtIndex: section];
 } // End of titleForHeaderInSection
@@ -210,29 +191,22 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
-	if ( aTableView == self.searchDisplayController.searchResultsTableView )
-	{
+    // Get our letter
+    NSString *alphabet = [setIndex objectAtIndex: [indexPath section]];
 
-	} // End of searching
-    else
-    {
-        // Get our letter
-        NSString *alphabet = [setIndex objectAtIndex: [indexPath section]];
+    // Find the cached items
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(format beginswith[c] %@)", alphabet];
+    NSArray * temp = [formats filteredArrayUsingPredicate: predicate];
+    NSDictionary * format = [temp objectAtIndex: indexPath.row];
 
-        // Find the cached items
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(format beginswith[c] %@)", alphabet];
-        NSArray * temp = [formats filteredArrayUsingPredicate: predicate];
-        NSDictionary * format = [temp objectAtIndex: indexPath.row];
+    cell.textLabel.text = [format objectForKey: @"format"];
 
-        cell.textLabel.text = [format objectForKey: @"format"];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSString *formattedOutput = [formatter stringFromNumber: [format objectForKey: @"cardCount"]];
 
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *formattedOutput = [formatter stringFromNumber: [format objectForKey: @"cardCount"]];
-
-        cell.detailTextLabel.text = [NSString stringWithFormat: @"%@ cards", formattedOutput];
-        cell.detailTextLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent: 0.60];
-    }
+    cell.detailTextLabel.text = [NSString stringWithFormat: @"%@ cards", formattedOutput];
+    cell.detailTextLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent: 0.60];
 
     return cell;
 } // End of cellForRowAtIndexPath
@@ -245,22 +219,15 @@
 
     NSString * formatString;
 
-	if ( aTableView == self.searchDisplayController.searchResultsTableView )
-	{
-        
-	} // End of searching
-    else
-    {
-        // Get our letter
-        NSString *alphabet = [setIndex objectAtIndex: [indexPath section]];
-        
-        // Find the cached items
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(format beginswith[c] %@)", alphabet];
-        NSArray * temp = [formats filteredArrayUsingPredicate: predicate];
-        NSDictionary * format = [temp objectAtIndex: indexPath.row];
-        
-        formatString = [format objectForKey: @"format"];
-    }
+    // Get our letter
+    NSString *alphabet = [setIndex objectAtIndex: [indexPath section]];
+    
+    // Find the cached items
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(format beginswith[c] %@)", alphabet];
+    NSArray * temp = [formats filteredArrayUsingPredicate: predicate];
+    NSDictionary * format = [temp objectAtIndex: indexPath.row];
+    
+    formatString = [format objectForKey: @"format"];
 
 	MTGSmartSearch * tempSmartSearch = [MTGSmartSearch smartSearchForFormat: formatString];
 

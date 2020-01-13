@@ -106,6 +106,18 @@
     _revealBlock();
 }
 
+- (void) initializeLayoutsIfNeeded
+{
+    if(nil != largeGridFlowLayout)
+    {
+        return;
+    }
+
+    largeGridFlowLayout = [[MTGLargeGridFlowLayout alloc] init];
+    gridFlowLayout = [[MTGGridFlowLayout alloc] init];
+    tableFlowLayout = [[MTGTableFlowLayout alloc] init];
+} // End of initializeLayoutsIfNeeded
+
 - (void) loadView
 {
     if(0 == self.title.length)
@@ -115,9 +127,7 @@
 
     [super loadView];
 
-    largeGridFlowLayout = [[MTGLargeGridFlowLayout alloc] init];
-    gridFlowLayout = [[MTGGridFlowLayout alloc] init];
-    tableFlowLayout = [[MTGTableFlowLayout alloc] init];
+    [self initializeLayoutsIfNeeded];
 
     UIColor * backgroundColor = SQLProAppearanceManager.sharedInstance.darkTableBackgroundColor;
 
@@ -286,6 +296,8 @@
 
 - (void) updateGrid
 {
+    [self initializeLayoutsIfNeeded];
+
 //    bool horizontal = [[NSUserDefaults standardUserDefaults] boolForKey: @"gridScrollsHorizontal"];
 //    bool paged      = [[NSUserDefaults standardUserDefaults] boolForKey: @"gridScrollsPaged"];
 
@@ -614,6 +626,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath
 
 - (void) modeToggled: (id) sender
 {
+    [self initializeLayoutsIfNeeded];
+
 	// Update our user defaults
     NSNumber * toggleMode = [NSNumber numberWithInteger: listStyleSegmentedControl.selectedSegmentIndex];
 
